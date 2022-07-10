@@ -1,0 +1,9 @@
+SHELL=/bin/bash
+@reboot /usr/bin/screen -dmS au0004 /usr/local/bin/RMS_Launch.sh au0004
+@reboot /usr/bin/screen -dmS au0006 /usr/local/bin/RMS_Launch.sh au0006
+@reboot /usr/bin/screen -dmS au0007 /usr/local/bin/RMS_Launch.sh au0008
+@reboot /usr/bin/screen -dmS au0008 /usr/local/bin/RMS_Launch.sh au0008
+@reboot /usr/bin/screen -dmS au0009 /usr/local/bin/RMS_Launch.sh au0009
+@reboot /usr/bin/screen -dmS au000l /usr/local/bin/RMS_Launch.sh au000l
+
+

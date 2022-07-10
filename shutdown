@@ -1,0 +1,10 @@
+#!/bin/bash
+#this script replaces the normal shutdown function, so that when the iStraStream script calls it when add a file to the shutdown calls directory
+echo There are $(ls /home/gmn/shutdowncalls | wc -l) pending shutdown requests.
+echo Set camera parameters to daytime
+/home/gmn/scripts/povg/gmnsetcameraparamsday.sh
+echo Run local special scripts
+~/gmnlocal.sh
+touch /home/gmn/shutdowncalls/$(pwd | pwd | cut -d '/' -f3 )
+echo Attempt a shutdown
+/home/gmn/scripts/povggmn/gmnpoweroff.sh
