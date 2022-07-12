@@ -8,6 +8,7 @@
 
 #find the latest directories
 username=$(pwd | pwd | cut -d '/' -f3 )
+echo Username is $username
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 latestarchiveddirectory=`ls /home/$username/RMS_data/ArchivedFiles | tail  -n2 | head -n1`
@@ -16,8 +17,8 @@ latestarchiveddirectory=/home/$username/RMS_data/ArchivedFiles/$latestarchiveddi
 echo Latest directory is $latestdirectory
 echo Latest archived directory is $latestarchiveddirectory
 
-source ~/vRMS/bin/activate
-cd ~/source/RMS
+source /home/$username/vRMS/bin/activate
+cd /home/$username/source/RMS
 
 echo "Starting TrackStack"
 python -m Utils.TrackStack $latestdirectory 
