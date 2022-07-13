@@ -5,6 +5,6 @@
 source ~/vRMS/bin/activate
 cd ~/source/RMS
 ./Scripts/RMS_Update.sh
-/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh
+gmnsetcameraparamsnight.sh
 ./Scripts/RMS_StartCapture.sh
 

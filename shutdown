@@ -4,7 +4,8 @@ username=$(pwd | pwd | cut -d '/' -f3 )
 echo Username is $username
 echo There are $(ls /home/gmn/shutdowncalls | wc -l) pending shutdown requests.
 echo Set camera parameters to daytime
-/home/gmn/scripts/povg/gmnsetcameraparamsday.sh
+cd /home/$username/source/RMS
+gmnsetcameraparamsday.sh
 echo Run local special scripts
 /home/$username/gmnlocal.sh
 touch /home/gmn/shutdowncalls/$username
