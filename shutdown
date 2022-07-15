@@ -5,7 +5,7 @@ echo Username is $username
 echo There are $(ls /home/gmn/shutdowncalls | wc -l) pending shutdown requests.
 echo Set camera parameters to daytime
 cd /home/$username/source/RMS
-gmnsetcameraparamsday.sh
+#gmnsetcameraparamsday.sh
 echo Run local special scripts
 /home/$username/gmnlocal.sh
 touch /home/gmn/shutdowncalls/$username

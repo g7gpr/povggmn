@@ -22,6 +22,6 @@ STATION_ID=$(echo $username | tr '[:lower:]' '[:upper:]')
 echo STATION_ID = $STATION_ID
 echo CAPTURED_DIR_NAME = $latestdirectory
 echo ARCHIVED_DIR_NAME = $latestarchiveddirectory
-iStream/iStream.sh $STATION_ID $CAPTURED_DIR_NAME $ARCHIVED_DIR_NAME 0.0 0.0 0.0 0.0 0.0 3601
+iStream/iStream.sh $STATION_ID $latestdirectory $latestarchiveddirectory 0.0 0.0 0.0 0.0 0.0 3601
 
 
