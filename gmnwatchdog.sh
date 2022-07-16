@@ -28,6 +28,9 @@ mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(wh
 logger -s -t $(whoami) set to night mode
 ~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 logger -s -t $(whoami) RMS_Update completed
+sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
+sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
+
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
 logger -s -t $(whoami) in ready to start state
 
@@ -56,6 +59,7 @@ username=$(whoami)
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`
 latestfile=`ls /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.fits | tail  -n1`
 sshpass -p $1 scp $latestfile gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
+sshpass -p $1 scp /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.txt gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 
 fi
 
@@ -74,7 +78,7 @@ logger -s -t $(whoami) set to day mode
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run trackstack
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
-#python -m Utils.TrackStack $latestdirectory 
+python -m Utils.TrackStack $latestdirectory 
 sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 echo Trackstack from $username was formed from files in $latestdirectory.  | mail -s "$username trackstack" g7gpr@outlook.com davidrollinson@hotmail.com -A $latestdirectory/*_track*
