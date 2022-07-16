@@ -84,7 +84,7 @@ for camera in *
 do
 if test -f "/home/gmn/states/readyforshutdown/$camera"
 then
-logger -s -t $camera is in shutdown
+logger -s -t $camera is in readyforshutdown
 else
 logger -s -t $camera is not in readyforshutdown
 readyforshutdown=FALSE
