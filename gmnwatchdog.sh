@@ -9,6 +9,11 @@
 #camerasstopped          - set to day parameters, run trackstack and email files
 #readyforshutdown        - if all cameras are in readyforshutdown call shutdown or reboot
 
+
+
+echo $backupcommand
+
+
 cd ~/source/RMS
 source ~/vRMS/bin/activate
 logger -s -t $(whoami) running watchdog
@@ -18,12 +23,12 @@ if test -f /home/gmn/states/systembooted/$(whoami)						#is this camera booted
 then
 
 logger -s -t $(whoami) in systembooted
+mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode
 logger -s -t $(whoami) set to night mode
-mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)
-~/source/RMS/Scripts/RMS_Update.sh									#update the gmnsoftware
+~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 logger -s -t $(whoami) RMS_Update completed
-mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)
+mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
 logger -s -t $(whoami) in ready to start state
 
 fi
@@ -33,25 +38,23 @@ if test -f /home/gmn/states/camerasreadytostart/$(whoami)					#is this camera re
 then
 
 logger -s -t $(whoami) in camerasreadytostart
-mv /home/gmn/states/camerasreadytostart/$(whoami) /home/gmn/states/camerasrunning/$(whoami)
+mv /home/gmn/states/camerasreadytostart/$(whoami) /home/gmn/states/camerasrunning/$(whoami)	#set camera as running
 /usr/bin/screen -dmS $(whoami) /home/gmn/scripts/povggmn/gmnupdateandrun.sh
 
 fi
 
-if test -f /home/gmn/states/camerasrunning/$(whoami)					#is this camera ready to start
+if test -f /home/gmn/states/camerasrunning/$(whoami)						#is this camera running
 
 then
 
-logger -s -t $(whoami) writing live image
+logger -s -t $(whoami) writing live image							#do the routine work whilst the camera is runing
 sshpass -p $1 scp ~/RMS_data/live.jpg gmndata@192.168.1.230:/home/gmndata/liveimages/$(whoami).jpg
 sshpass -p $1 scp ~/source/RMS/.config gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp ~/source/RMS/platepar* gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 
 username=$(whoami)
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`
-echo Latestdirectory is $latestdirectory
 latestfile=`ls /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.fits | tail  -n1`
-echo Latestfile is $latestfile
 sshpass -p $1 scp $latestfile gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 
 fi
@@ -66,14 +69,26 @@ then
 mv /home/gmn/states/camerasstopped/$(whoami) /home/gmn/states/runningfinalroutines/$(whoami)
 username=$(whoami)
 logger -s -t $(whoami) in camerasstopped
-/home/gmn/scripts/povggmn/gmnsetcameraparamsday.sh							#set to day mode
+/home/gmn/scripts/povggmn/gmnsetcameraparamsday.sh						#set to day mode
 logger -s -t $(whoami) set to day mode
-latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`
+latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run trackstack
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
-python -m Utils.TrackStack $latestdirectory 
+#python -m Utils.TrackStack $latestdirectory 
+sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
+sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 echo Trackstack from $username was formed from files in $latestdirectory.  | mail -s "$username trackstack" g7gpr@outlook.com davidrollinson@hotmail.com -A $latestdirectory/*_track*
+backuptime=`date +%Y%m%d%H%M%S`
+backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
+echo Sending command
+echo $backupcommand
+sshpass -p $1 ssh gmndata@192.168.1.230 $backupcommand
+
+
+
 mv /home/gmn/states/runningfinalroutines/$(whoami) /home/gmn/states/readyforshutdown/$(whoami)
+
+
 
 fi
 

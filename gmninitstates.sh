@@ -1,13 +1,15 @@
 #!/bin/bash
 #This script intialises the state machine
-
-rm /home/gmn/states/camerasreadytostart/*
-rm /home/gmn/states/camerasrunning/*
-rm /home/gmn/states/camerasstopped/*
-rm /home/gmn/states/readyforshutdown/*
-rm /home/gmn/states/shutdowncalls/*
-rm /home/gmn/states/systembooted/*
-rm /home/gmn/states/camerasupdating/*
+rm -rf /home/gmn/states/*
+mkdir -p /home/gmn/states/camerasreadytostart
+mkdir -p /home/gmn/states/camerasrunning
+mkdir -p /home/gmn/states/camerasstopped
+mkdir -p /home/gmn/states/readyforshutdown
+mkdir -p /home/gmn/states/shutdowncalls
+mkdir -p /home/gmn/states/systembooted
+mkdir -p /home/gmn/states/camerasupdating
+mkdir -p /home/gmn/states/runningfinalroutines
 cp /home/gmn/cameras/* /home/gmn/states/systembooted/
-
+cd /home/gmn/states
+chmod -R ugo+rwx * 
 
