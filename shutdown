@@ -1,13 +1,6 @@
 #!/bin/bash
 #this script replaces the normal shutdown function, so that when the iStraStream script calls it when add a file to the shutdown calls directory
 username=$(pwd | pwd | cut -d '/' -f3 )
-echo Username is $username
-echo There are $(ls /home/gmn/shutdowncalls | wc -l) pending shutdown requests.
-echo Set camera parameters to daytime
-cd /home/$username/source/RMS
-#gmnsetcameraparamsday.sh
-echo Run local special scripts
-/home/$username/gmnlocal.sh
-touch /home/gmn/shutdowncalls/$username
-echo Attempt a shutdown
-/home/gmn/scripts/povggmn/gmnpoweroff.sh
+logger -s -t $username Shutdown call made
+mv /home/gmn/states/camerasrunning/$username /home/gmn/states/camerasstopped/
+
