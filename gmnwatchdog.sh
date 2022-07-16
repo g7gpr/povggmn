@@ -30,8 +30,8 @@ logger -s -t $(whoami) set to night mode
 logger -s -t $(whoami) RMS_Update completed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
-ip a | grep 10.8. | cut -c 10-18 > cd ~/RMS_data/ipaddress
-sshpass -p $1 scp /home/$username/RMS_data/CapturedFiles/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest/ipaddress
+ip a | grep 10.8. | cut -c 10-18 > cd /home/$(whoami)/RMS_data/ipaddress
+sshpass -p $1 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest/ipaddress
 
 
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
@@ -63,6 +63,8 @@ latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`
 latestfile=`ls /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.fits | tail  -n1`
 sshpass -p $1 scp $latestfile gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.txt gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
+ip a | grep 10.8. | cut -c 10-18 > ~/RMS_data/ipaddress
+sshpass -p $1 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest/ipaddress
 
 fi
 
