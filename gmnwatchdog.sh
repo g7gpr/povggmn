@@ -30,6 +30,9 @@ logger -s -t $(whoami) set to night mode
 logger -s -t $(whoami) RMS_Update completed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
+ip a | grep 10.8. | cut -c 10-18 > cd ~/RMS_data/ipaddress
+sshpass -p $1 scp /home/$username/RMS_data/CapturedFiles/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest/ipaddress
+
 
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
 logger -s -t $(whoami) in ready to start state
