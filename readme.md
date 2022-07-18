@@ -138,3 +138,4 @@ fudge 127.127.28.1 refid PPS
 
 - Allow each user to run shutdown without sudo
 
+- add mailinglist into gmn home directory
