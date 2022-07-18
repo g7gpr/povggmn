@@ -63,6 +63,7 @@ latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`
 latestfile=`ls /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.fits | tail  -n1`
 sshpass -p $1 scp $latestfile gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.txt gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
+
 ip a | grep 10.8. | cut -c 10-18 > ~/RMS_data/ipaddress
 sshpass -p $1 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest/ipaddress
 
