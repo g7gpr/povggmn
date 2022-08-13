@@ -87,7 +87,8 @@ logger -s -t $(whoami) Starting trackstack in $latestdirectory
 python -m Utils.TrackStack $latestdirectory 
 sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
-echo Trackstack from $username was formed from files in $latestdirectory.  | mail -s "$username trackstack" "$(</home/gmn/mailinglist)" -A $latestdirectory/*_track*
+#echo Trackstack from $username was formed from files in $latestdirectory.  | mail -s "$username trackstack" "$(</home/gmn/mailinglist)" -A $latestdirectory/*_track*
+echo Trackstack from $username was formed from files in $latestdirectory.  | mutt  -s "$username trackstack" "$(</home/gmn/mailinglist)" -a $latestdirectory/*_track*
 backuptime=`date +%Y%m%d%H%M%S`
 backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
 echo Sending command
