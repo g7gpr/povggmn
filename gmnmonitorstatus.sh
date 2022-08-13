@@ -1,4 +1,6 @@
 #!/bin/bash
+echo Cameras
+ls /home/gmn/cameras
 echo Systembooted
 ls /home/gmn/states/systembooted
 echo Cameras updating
