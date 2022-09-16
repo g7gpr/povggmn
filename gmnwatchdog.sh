@@ -76,6 +76,13 @@ if test -f /home/gmn/states/camerasstopped/$(whoami)						#is this camera stoppe
 
 then
 
+if [ "$(ls -A /home/gmn/states/runningfinalroutines)" ]; then
+
+logger -s -t $(whoami) Not starting final routines $(ls /home/gmn/states/runningfinalroutines) is in process
+
+else
+
+logger -s -t $(whoami) Starting final routines, no other camera in process
 mv /home/gmn/states/camerasstopped/$(whoami) /home/gmn/states/runningfinalroutines/$(whoami)
 username=$(whoami)
 logger -s -t $(whoami) in camerasstopped
@@ -88,18 +95,17 @@ python -m Utils.TrackStack $latestdirectory
 sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 #echo Trackstack from $username was formed from files in $latestdirectory.  | mail -s "$username trackstack" "$(</home/gmn/mailinglist)" -A $latestdirectory/*_track*
-echo Trackstack from $username was formed from files in $latestdirectory.  | mutt  -s "$username trackstack" "$(</home/gmn/mailinglist)" -a $latestdirectory/*_track*
+#echo Trackstack from $username was formed from files in $latestdirectory.  | mutt  -s "$username trackstack" "$(</home/gmn/mailinglist)" -a $latestdirectory/*_track*
+cp $latestdirectory/*_track* /home/gmn/outbox
 backuptime=`date +%Y%m%d%H%M%S`
 backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
 echo Sending command
 echo $backupcommand
 sshpass -p $1 ssh gmndata@192.168.1.230 $backupcommand
-
-
-
 mv /home/gmn/states/runningfinalroutines/$(whoami) /home/gmn/states/readyforshutdown/$(whoami)
+logger -s -t $(whoami) Finished final routines
 
-
+fi
 
 fi
 
@@ -126,7 +132,7 @@ logger -s -t GMN Running final preshutdown routines
 rm /home/gmn/states/readyforshutdown/*
 logger -s -t GMN Cleared ready for shutdown directory
 logger -s -t Wait 60 seconds so mails get sent
-sleep 60
+sleep 600
 logger -s -t GMN Running sudo reboot
 sudo reboot
 else
