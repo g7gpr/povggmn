@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# bash script to set an IMX291 camera up from scratch
+# bash script to set an IMX291 camera for night settings
 #
 echo "This script will set your camera to the recommended settings"
 echo "for brightness, video style, gain, and so on. "

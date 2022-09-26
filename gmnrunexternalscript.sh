@@ -1,8 +1,6 @@
 #!/bin/bash
 
-#This script goes out to a remote machine and pulls back the files required to do work on platepars
-#It starts skyfit on the local machine and when skyfit has finished, it saves the platepars back to the remote machine. 
-#It also holds backups of the key files.
+#This script calls gmnrunexternalscript with the path to the latest directory and latest archived directory
 
 #Process arguments
 

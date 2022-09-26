@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#This script install RMS into a single username
+
 #Change to the home directory
 cd ~
 
@@ -27,3 +29,6 @@ sudo apt-get install curl -y
 #Clean up
 rm install.sh
 rm opencv4_install.sh
+
+#Make the outbox directory
+mkdir /home/gmn/outbox

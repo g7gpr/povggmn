@@ -1,8 +1,6 @@
 #!/bin/bash
 
-#This script goes out to a remote machine and pulls back the files required to do work on platepars
-#It starts skyfit on the local machine and when skyfit has finished, it saves the platepars back to the remote machine. 
-#It also holds backups of the key files.
+#This script does all the final routines per camera. This produces a trackstack of the nights meteor detections
 
 #Process arguments
 

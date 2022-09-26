@@ -131,11 +131,7 @@ then
 logger -s -t GMN Running final preshutdown routines
 rm /home/gmn/states/readyforshutdown/*
 logger -s -t GMN Cleared ready for shutdown directory
-<<<<<<< HEAD
 logger -s -t Wait 600 seconds so mails get sent
-=======
-logger -s -t Wait 60 seconds so mails get sent
->>>>>>> 8d14b420cd5671e0ea04d549d718520565c8333e
 sleep 600
 logger -s -t GMN Running sudo reboot
 sudo reboot

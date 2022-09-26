@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# bash script to set an IMX291 camera up from scratch
+# bash script to set an IMX291 camera to day settings
 #
 echo "This script will set your camera to settings which can be used during the day"
 echo ""

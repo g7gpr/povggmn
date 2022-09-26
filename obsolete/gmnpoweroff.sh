@@ -1,5 +1,6 @@
 #!/bin/bash
 #This script can either be called by any users cron, probably gmn on a regular basis, or from the shutdown function
+#It checks that the same number of cameras are in the shutdown calls directory as in the home directory and then reboots the computer
 
 echo Number of pending shutdowncalls is $(ls /home/gmn/shutdowncalls | wc -l)
 cameras=`ls /home/ | grep au | wc -l`
