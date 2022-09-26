@@ -7,27 +7,52 @@ This is a selection of utilities to assist with operating the network of meteor 
 ## Descriptions
 
 ```
-examplecrontab		old way of starting RMS_Capture. No longer in use
-gmnforcereboot.sh	resets the camera management and reboots the computer
-gmnmonitorstatus.sh	shows the status of the lockfiles
-gmnreboot.sh		if every camera has requested a shutdown then reboot the computer
-gmnupdateandrun.sh	RMS_Update.sh and RMS_StartCapture.sh
-readme.md		this file
-gmndiskuseage.sh	shows the amount of space used by a cameras RMS_data directory
-gmninstall.sh		the installation scripts by 
-gmnquota.sh		each time this is called, if the disk use is above the quota in GB passed as parameter
-                        one Capture directory and one Archive directory is deleted
-gmnskyfitremote.sh	pulls the platepar, .config and some of the most recent FITS files from a remote machine
-			runs SkyFit locally and when skyfit terminates, puts the files back again. Also
-			makes backups and stores them in date stamped folders
-gmnwatchdog.sh		checks that a camera has announced that it has started, if it has not, then it starts the camera
-			runs from a cameras own cron
-pinout			the pinouts for the headers on the camera modules
-shutdown		the file which replaces the system shutdown command. This allows iStraStream to call shutdown safely
-			and marks that the camera has finished to get ready for a reboot
+gmndiskuseage.sh Script to show the size of the users RMS_data directory. The cameraname is passed by an argument
+gmndiskuseage.sh au0004
 
+gmnforcereboot.sh Resets the state machine and forces a reboot
 
+gmninitstates.sh Initialise the state machine
 
+gmninstall.sh Install RMS for Linux PC
+
+gmnmailer.sh Implements a simple mail dequeuer because some free email providers will not permit multiple concurrent logins
+
+gmnmonitorstatus.sh Shows the states of all the cameras on the PC and the mail queue
+
+gmnquota.sh Removes one captured file and archived file directory if the quota has been exceeeded for the current users
+
+au0004@baldivis:/home/gmn/scripts/povggmn$ gmnquota.sh 200
+Sleeping for 13 seconds
+Space used is 133GB
+Quota is 200GB
+Underquota
+
+au0004@baldivis:/home/gmn/scripts/povggmn$ gmnquota.sh 100
+Sleeping for 11 seconds
+Space used is 132GB
+Quota is 100GB
+Overquota
+Next captured files directory to delete is /home/au0004/RMS_data/CapturedFiles/AU0004_20220901_122348_614809
+Next archived files to delete is /home/au0004/RMS_data/ArchivedFiles/AU0004_20220711_120326_665638_detected.tar.bz2
+Old space used was 133GB
+New space used was 121GB
+Space freed was 12GB
+
+gmnrunexternalscript.sh Calls RMS.RunExternalScript with the path to the latest directories
+
+gmnsetcameraparamsday.sh Sets IMX291 sensor to daytime settings
+gmnsetcameraparamsnight.sh Sets IMX291 sensor to night time settings
+
+gmnskyfitremote.sh This script gets the platepar and .config files from a remote machine, runs SkyFit2 on a local machine, then saves the updated files back to the remote machine
+
+gmnskyfitremote.sh au0004@baldivis <password>
+
+gmnupdateandrun.sh Updates RMS on the PC and starts capture
+
+gmnwatchdog.sh This scripts controls the state machine, and must be called by each camera users crontab
+
+shutdown This script is called instead of the normal system shutdown. This moves the state of a camera from running to stopped
 
 ```
 

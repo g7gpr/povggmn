@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script calls gmnrunexternalscript with the path to the latest directory and latest archived directory
+#This script calls RMS.RunExternalScript with the path to the latest capture directory and latest archived directory
 
 #Process arguments
 

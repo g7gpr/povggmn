@@ -32,3 +32,4 @@ rm opencv4_install.sh
 
 #Make the outbox directory
 mkdir /home/gmn/outbox
+chmod a=rwx /home/gmn/outbox

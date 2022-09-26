@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script goes out to a remote machine and pulls back the files required to do work on platepars
+#This script pulls the platepars and .config files from a remote machine, starts SkyFit2 on the local machine and then pushes the updated files back to the remote machine
 #It starts skyfit on the local machine and when skyfit has finished, it saves the platepars back to the remote machine. 
 #It also holds backups of the key files.
 

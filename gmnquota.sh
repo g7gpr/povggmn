@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#This script keep the size of the RMS_data directory for each user under control
-#rmsquota.sh 200 will check if the RMS_data directory is greater than 200GB, if it is then each time it is called it will delete one 
-#CapturedFiles folder, and one ArchivedFiles folder. Only needs to be called once each day.
+#This script will delete folders from a cameras RMS_Data directory if the directory is above quota
+#gmnquota.sh 200 will check if the RMS_data directory is greater than 200GB, if it is then each time it is called it will delete one
+#CapturedFiles folder, and one ArchivedFiles folder.
 
 gbtokb=1048576
 sleeptimer=$((10 + RANDOM % 11));
@@ -10,10 +10,10 @@ echo Sleeping for $sleeptimer seconds
 sleep $sleeptimer
 
 quota=$(expr $1 \* $gbtokb)
-spaceused=`du -d0 ~/RMS_data/ | cut -d '/' -f1`
-spaceusedh=`du -d0 -h ~/RMS_data/ | cut -d '/' -f1`
-echo Space used is $(expr $spaceused / $gbtokb)
-echo Quota is      $(expr $quota     / $gbtokb)
+spaceused=`du -d0 ~/RMS_data/ | cut -d '/' -f1 | xargs`
+spaceusedh=`du -d0 -h ~/RMS_data/ | cut -d '/' -f1  | xargs`
+echo Space used is $(expr $spaceused / $gbtokb)GB
+echo Quota is      $(expr $quota     / $gbtokb)GB
 if [ $spaceused -gt $quota ]
 then
 
@@ -38,11 +38,11 @@ then
 
  fi 
 
- newspaceused=`du -d0  ~/RMS_data/ | cut -d '/' -f1`
- newspaceusedh=`du -d0 -h  ~/RMS_data/ | cut -d '/' -f1`
- echo Old space used was $spaceusedh
- echo New space used was $newspaceusedh 
- echo Space freed was `expr $spaceused / $gbtokb - $newspaceused / $gbtokb`
+ newspaceused=`du -d0  ~/RMS_data/ | cut -d '/' -f1 | xargs`
+ newspaceusedh=`du -d0 -h  ~/RMS_data/ | cut -d '/' -f1 | xargs`
+ echo Old space used was $spaceusedh"B"
+ echo New space used was $newspaceusedh"B"
+ echo Space freed was `expr $spaceused / $gbtokb - $newspaceused / $gbtokb`GB
 
 else
 
