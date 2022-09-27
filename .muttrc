@@ -1,0 +1,2 @@
+set from="gmn<observatory-name>@outlook.com"
+set use_envelope_from = yes
