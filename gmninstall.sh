@@ -23,7 +23,7 @@ chmod +x *.sh
 sudo apt-get install curl -y
 
 #install mutt
-sudo apt-get install mutt -y
+sudo apt-get install ssmtp mutt -y
 
 #Do the installation
 ./install.sh
