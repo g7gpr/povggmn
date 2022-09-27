@@ -22,6 +22,9 @@ chmod +x *.sh
 #install curl - this is needed by istrastream but does not always get installed
 sudo apt-get install curl -y
 
+#install mutt
+sudo apt-get install mutt -y
+
 #Do the installation
 ./install.sh
 
