@@ -186,4 +186,12 @@ fudge 127.127.28.1 refid PPS
 
 - add mailinglist into gmn home directory
 
+- sudo cp ssmtp.conf /etc/ssmtp/ssmtp.conf
 
+- create an outlook account gmn<observatory-name>@outlook.com and edit the ssmtp file with credentials
+
+- cp .muttrc ~
+
+- pico ~/.muttrc 
+
+- edit with email address
