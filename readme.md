@@ -64,8 +64,11 @@ shutdown This script is called instead of the normal system shutdown. This moves
 - Install the SSH server, and standard system utilities only
 - Boot and shutdown, all futher work will be via ssh over local lan
 - via ssh Login as the observatory user
+
+- switch to the root user
+
 - su
-- 
+- and enter the superuser password
 
 `apt-get install -y sudo`
 
@@ -89,7 +92,15 @@ shutdown This script is called instead of the normal system shutdown. This moves
 
 - The rest of the work can be done remotely
 
+- As the gmn user
+
+- mkdir -p ~/scripts
+
+- cd ~/scripts
+
 - Clone povggmnutils repository
+
+- git clone https://www.github.com/g7gpr/povggmn
 
 - Set PATH variable to repository location
 
@@ -99,9 +110,17 @@ shutdown This script is called instead of the normal system shutdown. This moves
 
 - PATH=$PATH:/home/gmn/scripts/povggmn
 
+- Save and exit then load the new .bashrc
+
 - source ~/.bashrc
 
-- also do this by su and edit  /.bashrc
+- switch to root
+
+- su
+
+- add PATH=$PATH:/home/gmn/scripts/povggmn to /.bashrc
+
+- exit root user
 
 - Run gmninstall in the <observatory-name> account (this will take a long time)
 
@@ -135,32 +154,36 @@ fudge 127.127.28.1 refid PPS
 
 - Create users for each of the cameras with sudo priviledge
 
-- Create the .ssh key for each user with an empty passphrase
+- sudo adduser <camera-name>
+
+- sudo usermod -aG sudo <camera-name>
+
+- Log in to each camera and create the .ssh key for each user with an empty passphrase
 
 - ssh-keygen -t rsa -m PEM 
 
 - send the public part of the key to denis.vida@gmail.com
 
-- Run gmninstall for each of the cameras
+- Run gmninstall for each of the cameras consecutively
 
 - enable passwordless sudo for shutdown 
 
 - use sudo visudo to create a file with the name of each camera in the sudoers.d directory
 
+
 - <camera-name> ALL=(ALL) NOPASSWD: /home/gmn/scripts/povggmn/shutdown
+- <camera-name> ALL=(ALL) NOPASSWD: /usr/sbin/poweroff
+- <camera-name> ALL=(ALL) NOPASSWD: /usr/sbin/reboot
+
 
 - this will prevent the istrastream script from requiring manual password entry when it tries to call shutdown
 
-- Setup cron jobs to launch RMS_Update; RMS_StartCapture
-
-- Setup cron jobs for quota management
-
-- Setup the autoshutdown system
+- Setup cron jobs to run the state machine and the quota management
 
 - rename the /usr/local/bin/shutdown so it cant be used
 
-- edit the secure path in sudo visudo
-
-- Allow each user to run shutdown without sudo
+- add /home/gmn/scripts/povggmn: to the secure path in sudo visudo
 
 - add mailinglist into gmn home directory
+
+
