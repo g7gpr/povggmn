@@ -12,7 +12,7 @@
 
 
 echo $backupcommand
-
+mkdir -p /home/gmn/cameras/
 
 cd ~/source/RMS
 source ~/vRMS/bin/activate
@@ -28,6 +28,7 @@ mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(wh
 logger -s -t $(whoami) set to night mode
 ~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 logger -s -t $(whoami) RMS_Update completed
+/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
 ip a | grep 10.8. | cut -c 10-18 > cd /home/$(whoami)/RMS_data/ipaddress
