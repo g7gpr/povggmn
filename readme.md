@@ -195,3 +195,18 @@ fudge 127.127.28.1 refid PPS
 - pico ~/.muttrc 
 
 - edit with email address
+
+- add 
+
+SHELL=/bin/bash
+@reboot /home/gmn/scripts/povggmn/gmninitstates.sh
+
+to the root crontab
+
+- add
+
+
+9 * * * * /home/gmn/scripts/povggmn/gmnquota.sh 200
+*/10 * * * * /home/gmn/scripts/povggmn/gmnwatchdog.sh
+
+to each cameras crontab 

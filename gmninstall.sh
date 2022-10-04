@@ -22,6 +22,8 @@ chmod +x *.sh
 #install curl - this is needed by istrastream but does not always get installed
 sudo apt-get install curl -y
 
+sudo apt-get install sshpass -y
+
 #install mutt
 sudo apt-get install ssmtp mutt -y
 
@@ -36,3 +38,5 @@ rm opencv4_install.sh
 #Make the outbox directory
 sudo mkdir /home/gmn/outbox
 sudo chmod a=rwx /home/gmn/outbox
+/home/gmn/scripts/povggmn/gmninitstates.sh
+
