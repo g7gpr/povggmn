@@ -10,6 +10,8 @@
 #readyforshutdown        - if all cameras are in readyforshutdown call shutdown or reboot
 
 
+#sleep for a random length of time to reduce the number of race conditions
+sleep $[ ( $RANDOM % 60 )  + 1 ]s
 
 echo $backupcommand
 mkdir -p /home/gmn/cameras/
@@ -95,8 +97,6 @@ logger -s -t $(whoami) Starting trackstack in $latestdirectory
 python -m Utils.TrackStack $latestdirectory 
 sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
-#echo Trackstack from $username was formed from files in $latestdirectory.  | mail -s "$username trackstack" "$(</home/gmn/mailinglist)" -A $latestdirectory/*_track*
-#echo Trackstack from $username was formed from files in $latestdirectory.  | mutt  -s "$username trackstack" "$(</home/gmn/mailinglist)" -a $latestdirectory/*_track*
 cp $latestdirectory/*_track* /home/gmn/outbox
 backuptime=`date +%Y%m%d%H%M%S`
 backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
