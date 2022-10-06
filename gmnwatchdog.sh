@@ -11,7 +11,7 @@
 
 
 #sleep for a random length of time to reduce the number of race conditions
-sleep $[ ( $RANDOM % 60 )  + 1 ]s
+#sleep $[ ( $RANDOM % 60 )  + 1 ]s
 
 echo $backupcommand
 mkdir -p /home/gmn/cameras/
