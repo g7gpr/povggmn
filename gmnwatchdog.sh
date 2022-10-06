@@ -82,9 +82,9 @@ then
 #uncomment next line to only allow one final routines to run
 #if [ "$(ls -A /home/gmn/states/runningfinalroutines)" ]; then 
 
-logger -s -t $(whoami) Not starting final routines $(ls /home/gmn/states/runningfinalroutines) is in process
+#logger -s -t $(whoami) Not starting final routines $(ls /home/gmn/states/runningfinalroutines) is in process
 
-else
+#else
 
 logger -s -t $(whoami) Starting final routines, no other camera in process
 mv /home/gmn/states/camerasstopped/$(whoami) /home/gmn/states/runningfinalroutines/$(whoami)
