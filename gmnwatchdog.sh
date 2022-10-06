@@ -79,7 +79,8 @@ if test -f /home/gmn/states/camerasstopped/$(whoami)						#is this camera stoppe
 
 then
 
-if [ "$(ls -A /home/gmn/states/runningfinalroutines)" ]; then
+#uncomment next line to only allow one final routines to run
+#if [ "$(ls -A /home/gmn/states/runningfinalroutines)" ]; then 
 
 logger -s -t $(whoami) Not starting final routines $(ls /home/gmn/states/runningfinalroutines) is in process
 
@@ -106,7 +107,7 @@ sshpass -p $1 ssh gmndata@192.168.1.230 $backupcommand
 mv /home/gmn/states/runningfinalroutines/$(whoami) /home/gmn/states/readyforshutdown/$(whoami)
 logger -s -t $(whoami) Finished final routines
 
-fi
+# fi
 
 fi
 
