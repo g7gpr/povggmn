@@ -7,7 +7,7 @@
 gbtokb=1048576
 sleeptimer=$((10 + RANDOM % 11));
 echo Sleeping for $sleeptimer seconds
-sleep $sleeptimer
+#sleep $sleeptimer
 
 quota=$(expr $1 \* $gbtokb)
 spaceused=`du -d0 ~/RMS_data/ | cut -d '/' -f1 | xargs`
@@ -20,6 +20,7 @@ then
  echo Overquota
  nextcapturedfilesdirectory=`ls -d -rt ~/RMS_data/CapturedFiles/* | head -n1`
  nextarchivedfiles=`ls -d -rt ~/RMS_data/ArchivedFiles/* | head -n1`
+
 
  if [ -z $nextcapturedfilesdirectory ]
  then 
@@ -34,9 +35,12 @@ then
  echo No archived files to delete. Do nothing here.
  else 
  echo Next archived files to delete is $nextarchivedfiles
- rm -rf $nextarchivedfilesdirectory
+ rm -rf $nextarchivedfiles
 
  fi 
+
+
+
 
  newspaceused=`du -d0  ~/RMS_data/ | cut -d '/' -f1 | xargs`
  newspaceusedh=`du -d0 -h  ~/RMS_data/ | cut -d '/' -f1 | xargs`
