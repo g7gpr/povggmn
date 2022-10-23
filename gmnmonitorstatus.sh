@@ -1,9 +1,9 @@
 #!/bin/bash
 watch -n1 '
 
-echo Cameras
-ls /home/gmn/cameras
-echo
+#echo Cameras
+#ls /home/gmn/cameras
+#echo
 echo Systembooted
 ls /home/gmn/states/systembooted
 echo
@@ -31,6 +31,9 @@ echo
 
 echo
 echo Outbox
-echo 
 ls /home/gmn/outbox/
-'
+
+echo
+echo Filestoupload
+more /home/*/RMS_data/*.inf | grep AU > ~/tmpfilestoupload
+gmnuploadfilesizes.sh ~/tmpfilestoupload'
