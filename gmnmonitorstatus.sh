@@ -1,5 +1,5 @@
 #!/bin/bash
-watch -n30 '
+watch -n5 '
 
 #echo Cameras
 #ls /home/gmn/cameras
@@ -36,4 +36,15 @@ ls /home/gmn/outbox/
 echo
 echo Filestoupload
 more /home/*/RMS_data/*.inf | grep AU > ~/tmpfilestoupload
-gmnuploadfilesizes.sh ~/tmpfilestoupload'
+gmnuploadfilesizes.sh ~/tmpfilestoupload
+
+echo
+
+cameraname=$(ls /home/gmn/cameras | head -n1)
+latestlog=$(ls -t /home/$cameraname/RMS_data/logs/log* | head -n1)
+starttimeline=$(grep "Next start" $latestlog)
+starttime=${starttimeline#*$Next start time:}
+starttimeseconds=$(date -u -d "${starttime%$*UTC}" +"%s")
+timenowseconds=$(date +%s)
+echo Seconds before next start :$(expr $starttimeseconds - $timenowseconds)
+'
