@@ -46,5 +46,5 @@ starttimeline=$(grep "Next start" $latestlog)
 starttime=${starttimeline#*$Next start time:}
 starttimeseconds=$(date -u -d "${starttime%$*UTC}" +"%s")
 timenowseconds=$(date +%s)
-echo Seconds before next start :$(expr $starttimeseconds - $timenowseconds)
+echo Seconds before next start : $(expr $starttimeseconds - $timenowseconds)
 '
