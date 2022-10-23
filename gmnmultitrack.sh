@@ -11,19 +11,19 @@ echo $captured
 commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n2 | head -n1`
 echo $captured
-commandstring=$commandstring'   '$captured
+#commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n3 | head -n1`
 echo $captured
-commandstring=$commandstring'   '$captured
+#commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n4 | head -n1`
 echo $captured
-commandstring=$commandstring'   '$captured
+#commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n5 | head -n1`
 echo $captured
-commandstring=$commandstring'   '$captured
+#commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n6 | head -n1`
 echo $captured
-commandstring=$commandstring'   '$captured
+#commandstring=$commandstring'   '$captured
 done
 commandstring='python -m Utils.TrackStack '$commandstring'  -c . -o /home/gmn/outbox -s'$1
 echo $commandstring
