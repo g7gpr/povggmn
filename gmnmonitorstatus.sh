@@ -42,9 +42,9 @@ echo
 
 cameraname=$(ls /home/gmn/cameras | head -n1)
 latestlog=$(ls -t /home/$cameraname/RMS_data/logs/log* | head -n1)
-starttimeline=$(grep "Next start" $latestlog)
+starttimeline=$(grep "Next start" $latestlog | tail -n1)
 starttime=${starttimeline#*$Next start time:}
 starttimeseconds=$(date -u -d "${starttime%$*UTC}" +"%s")
 timenowseconds=$(date +%s)
-echo Seconds before next start : $(expr $starttimeseconds - $timenowseconds)
+echo Start Time : $starttime : Seconds before next start : $(expr $starttimeseconds - $timenowseconds)
 '

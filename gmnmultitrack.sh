@@ -25,5 +25,5 @@ captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data
 echo $captured
 #commandstring=$commandstring'   '$captured
 done
-commandstring='python -m Utils.TrackStack '$commandstring'  -c . -o /home/gmn/outbox -s'$1
-echo $commandstring
+commandstring='python -m Utils.TrackStack '$commandstring'  -c . -o /home/gmn/outbox '$1
+$commandstring
