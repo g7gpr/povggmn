@@ -9,6 +9,7 @@ mkdir -p /home/gmn/states/shutdowncalls
 mkdir -p /home/gmn/states/systembooted
 mkdir -p /home/gmn/states/camerasupdating
 mkdir -p /home/gmn/states/runningfinalroutines
+mkdir -p /home/gmn/states/runningfinalroutinesstation
 cp /home/gmn/cameras/* /home/gmn/states/systembooted/
 cd /home/gmn/states
 chmod -R ugo+rwx * 

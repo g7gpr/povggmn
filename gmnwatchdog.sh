@@ -11,7 +11,7 @@
 
 
 #sleep for a random length of time to reduce the number of race conditions
-#sleep $[ ( $RANDOM % 60 )  + 1 ]s
+sleep $[ ( $RANDOM % 60 )  + 1 ]s
 
 echo $backupcommand
 mkdir -p /home/gmn/cameras/
@@ -90,7 +90,7 @@ logger -s -t $(whoami) Starting final routines, no other camera in process
 mv /home/gmn/states/camerasstopped/$(whoami) /home/gmn/states/runningfinalroutines/$(whoami)
 username=$(whoami)
 logger -s -t $(whoami) in camerasstopped
-/home/gmn/scripts/povggmn/gmnsetcameraparamsday.sh						#set to day mode
+#/home/gmn/scripts/povggmn/gmnsetcameraparamsday.sh						#set to day mode
 logger -s -t $(whoami) set to day mode
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run trackstack
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
@@ -130,10 +130,15 @@ logger -s -t GMN Ready for shutdown is $readyforshutdown
 
 if [ $readyforshutdown = "TRUE" ] 
 then
-logger -s -t GMN Running final preshutdown routines
-rm /home/gmn/states/readyforshutdown/*
+logger -s -t GMN Running final preshutdown routine
+mv /home/gmn/states/readyforshutdown/$(whoami) /home/gmn/states/runningfinalroutinesstation
+logger -s -t GMN $(whoami) removed from ready for shutdown
+source ~/vRMS/bin/activate
+cd ~/source/RMS
+/home/gmn/scripts/povggmn/gmnmultitrack.sh
 logger -s -t GMN Cleared ready for shutdown directory
 logger -s -t Wait 600 seconds so mails get sent
+mv /home/gmn/states/runningfinalroutinesstation/$(whoami) /home/gmn/states/shutdowncalls
 sleep 600
 logger -s -t GMN Running sudo reboot
 sudo reboot

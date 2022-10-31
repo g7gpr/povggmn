@@ -25,6 +25,9 @@ echo
 echo Ready for shutdown
 ls /home/gmn/states/readyforshutdown
 echo
+echo Runing final routines station wide
+ls /home/gmn/states/runningfinalroutinesstation
+echo
 echo Shutdown calls
 ls /home/gmn/states/shutdowncalls
 echo
