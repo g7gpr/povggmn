@@ -28,8 +28,8 @@ logger -s -t $(whoami) in systembooted
 mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode
 logger -s -t $(whoami) set to night mode
-~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
-logger -s -t $(whoami) RMS_Update completed
+#~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
+#logger -s -t $(whoami) RMS_Update completed
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
@@ -140,8 +140,18 @@ logger -s -t GMN Cleared ready for shutdown directory
 logger -s -t Wait 600 seconds so mails get sent
 mv /home/gmn/states/runningfinalroutinesstation/$(whoami) /home/gmn/states/shutdowncalls
 sleep 600
+filestoupload=$(grep bz2 /home/*/RMS_data/*.inf | wc -l)
+if [ $filestoupload -eq 0 ] 
+then
+logger -s -t  No files to upload
 logger -s -t GMN Running sudo reboot
 sudo reboot
+else
+logger -s -t  $filestoupload files to upload. Moving all cameras back to cameras running
+mv /home/gmn/states/readyforshutdown/* /home/gmn/states/camerasrunning/
+mv /home/gmn/states/shutdowncalls/*    /home/gmn/states/camerasrunning/
+fi
+
 else
 logger -s -t GMN Not ready for shutdown
 fi
