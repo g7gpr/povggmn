@@ -27,15 +27,15 @@ then
 logger -s -t $(whoami) in systembooted
 mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode
-#logger -s -t $(whoami) set to night mode
+logger -s -t $(whoami) set to night mode
 ~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
-nohup sshpass -p $1 rsync -a --partial-dir=partial/ ~/RMS_data/ArchivedFiles/*.bz2 rsync://$(whoami)@192.168.1.230:12000/$(whoami) &
 logger -s -t $(whoami) RMS_Update completed
-#/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
+/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
 ip a | grep 10.8. | cut -c 10-18 > cd /home/$(whoami)/RMS_data/ipaddress
 sshpass -p $1 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest/ipaddress
+nohup sshpass -p $1 rsync -a ~/RMS_data/ArchivedFiles/*.bz2 rsync://$(whoami)@192.168.1.230:12000/$(whoami) &
 
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
 logger -s -t $(whoami) in ready to start state
