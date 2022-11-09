@@ -8,7 +8,7 @@
 remote='gmn.uwo.ca'
 cameraname=$(whoami | tr '[:lower:]' '[:upper:]')
 echo Cameraname is : $cameraname
-
+sleep $cameraname
 
 
 
