@@ -88,5 +88,10 @@ touch $filepath.confirmed
 else
 echo "File was not uploaded successfully, make an upload"
 #upload goes here
+sftp gmn.uwo.ca <<END
+cd files
+put $filepath
+END
+
 exit 3
 fi
