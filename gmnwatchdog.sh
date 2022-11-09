@@ -11,7 +11,7 @@
 
 
 #sleep for a random length of time to reduce the number of race conditions
-sleep $[ ( $RANDOM % 60 )  + 1 ]s
+/home/gmn/scripts/povggmn/gmnsleep.sh $(whoami)
 
 echo $backupcommand
 mkdir -p /home/gmn/cameras/
@@ -95,6 +95,7 @@ logger -s -t $(whoami) set to day mode
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run trackstack
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
+/home/gmn/scripts/povggmn/gmnrsync.sh $1
 python -m Utils.TrackStack $latestdirectory 
 sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
