@@ -11,14 +11,23 @@
 
 
 #sleep for a random length of time to reduce the number of race conditions
+username=$(whoami)
 /home/gmn/scripts/povggmn/gmnsleep.sh $(whoami)
 
+echo Username is $username
 mkdir -p /home/gmn/cameras/
 mkdir -p /home/gmn/$(hostname)/$(whoami)
 
 cp ~/source/RMS/mask.bmp             /home/gmn/$(hostname)/$(whoami)/
 cp ~/source/RMS/.config              /home/gmn/$(hostname)/$(whoami)/
 cp ~/source/RMS/platepar_cmn2010.cal /home/gmn/$(hostname)/$(whoami)/
+
+echo Writing the ip address 
+ipaddress=$(hostname -I)
+echo ip address : $ipaddress
+echo "$ipaddress" > /home/$(whoami)/RMS_data/$(whoami)".ip"
+sshpass -p $1 scp /home/$username/RMS_data/$(whoami)".ip" gmndata@192.168.1.230:/home/gmndata/
+
 
 
 cd ~/source/RMS
@@ -42,8 +51,6 @@ logger -s -t $(whoami) RMS_Update completed
 #/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
-ip a | grep 10.8. | cut -c 10-18 > ipaddress
-sshpass -p $1 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/ipaddress
 
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
 logger -s -t $(whoami) in ready to start state
