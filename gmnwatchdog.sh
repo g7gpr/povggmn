@@ -13,12 +13,20 @@
 #sleep for a random length of time to reduce the number of race conditions
 /home/gmn/scripts/povggmn/gmnsleep.sh $(whoami)
 
-echo $backupcommand
 mkdir -p /home/gmn/cameras/
+mkdir -p /home/gmn/$(hostname)/$(whoami)
+
+cp ~/source/RMS/mask.bmp             /home/gmn/$(hostname)/$(whoami)/
+cp ~/source/RMS/.config              /home/gmn/$(hostname)/$(whoami)/
+cp ~/source/RMS/platepar_cmn2010.cal /home/gmn/$(hostname)/$(whoami)/
+
 
 cd ~/source/RMS
 source ~/vRMS/bin/activate
 logger -s -t $(whoami) running watchdog
+
+
+
 
 if test -f /home/gmn/states/systembooted/$(whoami)						#is this camera booted
 
@@ -28,7 +36,7 @@ logger -s -t $(whoami) in systembooted
 mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode
 #logger -s -t $(whoami) set to night mode
-~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
+#~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 nohup sshpass -p $1 rsync -a --partial-dir=partial/ ~/RMS_data/ArchivedFiles/*.bz2 rsync://$(whoami)@192.168.1.230:12000/$(whoami) &
 logger -s -t $(whoami) RMS_Update completed
 #/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
