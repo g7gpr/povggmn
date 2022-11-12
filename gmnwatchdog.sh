@@ -18,17 +18,14 @@ echo Username is $username
 mkdir -p /home/gmn/cameras/
 mkdir -p /home/gmn/$(hostname)/$(whoami)
 
-cp ~/source/RMS/mask.bmp             /home/gmn/$(hostname)/$(whoami)/
-cp ~/source/RMS/.config              /home/gmn/$(hostname)/$(whoami)/
-cp ~/source/RMS/platepar_cmn2010.cal /home/gmn/$(hostname)/$(whoami)/
+
 
 echo Writing the ip address 
 ipaddress=$(hostname -I)
 echo ip address : $ipaddress
 echo "$ipaddress" > /home/$(whoami)/RMS_data/$(whoami)".ip"
+
 sshpass -p $1 scp   /home/$username/RMS_data/$(whoami)".ip" gmndata@192.168.1.230:/home/gmndata/
-
-
 
 cd ~/source/RMS
 source ~/vRMS/bin/activate
@@ -73,14 +70,6 @@ then
 
 logger -s -t $(whoami) writing live image							#do the routine work whilst the camera is runing
 sshpass -p $1 scp ~/RMS_data/live.jpg gmndata@192.168.1.230:/home/gmndata/liveimages/$(whoami).jpg
-sshpass -p $1 scp ~/source/RMS/.config gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
-sshpass -p $1 scp ~/source/RMS/platepar* gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
-
-username=$(whoami)
-latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`
-latestfile=`ls /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.fits | tail  -n1`
-sshpass -p $1 scp $latestfile gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
-sshpass -p $1 scp /home/$username/RMS_data/CapturedFiles/$latestdirectory/*.txt gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 
 ip a | grep 10.8. | cut -c 10-18 > ~/RMS_data/ipaddress
 sshpass -p $1 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/ipaddress
@@ -155,18 +144,15 @@ cd ~/source/RMS
 logger -s -t GMN Cleared ready for shutdown directory
 logger -s -t Wait 600 seconds so mails get sent
 mv /home/gmn/states/runningfinalroutinesstation/$(whoami) /home/gmn/states/shutdowncalls
+
+#make the package of backup information
+cp ~/source/RMS/mask.bmp             /home/gmn/$(hostname)/$(whoami)/
+cp ~/source/RMS/.config              /home/gmn/$(hostname)/$(whoami)/
+cp ~/source/RMS/platepar_cmn2010.cal /home/gmn/$(hostname)/$(whoami)/
+sshpass -p $1 scp -r  /home/gmn/$hostname/$(whoami)         gmndata@192.168.1.230:/home/gmndata/stations
+
+
 sleep 600
-filestoupload=$(grep bz2 /home/*/RMS_data/*.inf | wc -l)
-if [ $filestoupload -eq 0 ] 
-then
-logger -s -t  No files to upload
-logger -s -t GMN Running sudo reboot
-sudo reboot
-else
-logger -s -t  $filestoupload files to upload. Moving all cameras back to cameras running
-mv /home/gmn/states/readyforshutdown/* /home/gmn/states/camerasrunning/
-mv /home/gmn/states/shutdowncalls/*    /home/gmn/states/camerasrunning/
-fi
 
 else
 logger -s -t GMN Not ready for shutdown
