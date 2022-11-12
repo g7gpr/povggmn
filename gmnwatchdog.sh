@@ -43,7 +43,7 @@ mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(wh
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode
 #logger -s -t $(whoami) set to night mode
 ~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
-nohup sshpass -p $1 rsync -a --partial-dir=partial/ ~/RMS_data/ArchivedFiles/*.bz2 rsync://$(whoami)@192.168.1.230:12000/$(whoami) &
+/home/gmn/scripts/povggmn/gmnsshrsync.sh
 logger -s -t $(whoami) RMS_Update completed
 #/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
