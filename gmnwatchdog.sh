@@ -151,7 +151,7 @@ sshpass -p $1 scp -r  /home/gmn/$hostname/$(whoami)         gmndata@192.168.1.23
 
 
 sleep 600
-
+sudo reboot
 else
 logger -s -t GMN Not ready for shutdown
 fi
