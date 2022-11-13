@@ -32,12 +32,14 @@ mv ~/platepars/$username/.ssh  ~/platepars/$username/backup/$backuptime
 #copy from the remote machine to local machine
 
 #copy the .config file
+echo copying .config
 sshpass -p $2 scp    $1:/home/$username/source/RMS/.config              ~/platepars/$username/
 #copy the platepar file
+echo copying platepar
 sshpass -p $2 scp    $1:/home/$username/source/RMS/platepar_cmn2010.cal ~/platepars/$username/
+echo copying ssh
 #copy the .ssh key
 sshpass -p $2 scp -r $1:/home/$username/.ssh                            ~/platepars/$username/
-
 
 cp ~/platepars/$username/platepar_cmn2010.cal ~/platepars/$username/platepar_cmn2010.cal.bak
 #find the latest directory
