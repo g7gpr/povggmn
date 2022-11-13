@@ -1,5 +1,5 @@
 #!/bin/bash
-watch -n5 '
+watch -n60 '
 
 #echo Cameras
 #ls /home/gmn/cameras
