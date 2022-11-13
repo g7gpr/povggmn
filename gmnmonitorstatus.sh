@@ -1,5 +1,5 @@
 #!/bin/bash
-watch -n5 '
+watch -n60 '
 
 #echo Cameras
 #ls /home/gmn/cameras
@@ -40,8 +40,11 @@ echo
 echo Filestoupload
 more /home/*/RMS_data/*.inf | grep AU > ~/tmpfilestoupload
 gmnuploadfilesizes.sh ~/tmpfilestoupload
-
 echo
+echo Number of files : $(wc -l ~/tmpfilestoupload)
+echo
+
+rm ~/tmpfilestoupload
 
 cameraname=$(ls /home/gmn/cameras | head -n1)
 latestlog=$(ls -t /home/$cameraname/RMS_data/logs/log* | head -n1)
