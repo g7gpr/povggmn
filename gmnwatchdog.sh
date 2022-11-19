@@ -30,8 +30,7 @@ sshpass -p $1 scp   /home/$username/RMS_data/$(whoami)".ip" gmndata@192.168.1.23
 cd ~/source/RMS
 source ~/vRMS/bin/activate
 logger -s -t $(whoami) running watchdog
-
-
+git log -1 | grep commit > ~/gitlog
 
 
 if test -f /home/gmn/states/systembooted/$(whoami)						#is this camera booted
@@ -40,7 +39,7 @@ then
 
 logger -s -t $(whoami) in systembooted
 mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
-~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
+#~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 #/home/gmn/scripts/povggmn/gmnsshrsync.sh
 logger -s -t $(whoami) RMS_Update completed
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed

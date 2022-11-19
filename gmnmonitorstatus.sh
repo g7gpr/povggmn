@@ -44,6 +44,11 @@ echo
 echo Number of files : $(wc -l ~/tmpfilestoupload)
 echo
 
+MBtosend=$(gmnuploadfilesizes.sh ~/tmpfilestoupload | cut -d" " -f5 | paste -sd+ | bc -l)
+echo $MBtosend MB to be sent             
+
+
+
 rm ~/tmpfilestoupload
 
 cameraname=$(ls /home/gmn/cameras | head -n1)
