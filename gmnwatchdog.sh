@@ -39,8 +39,8 @@ then
 
 logger -s -t $(whoami) in systembooted
 mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
-#~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
-#/home/gmn/scripts/povggmn/gmnsshrsync.sh
+~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
+/home/gmn/scripts/povggmn/gmnsshrsync.sh
 logger -s -t $(whoami) RMS_Update completed
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
