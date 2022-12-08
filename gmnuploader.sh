@@ -64,7 +64,7 @@ then
 echo Incoming is empty
 else
 echo Incoming is not empty - which is strange, why is the file still there? Is it corrupted?
-cd ~/files/testing
+
 sftp $remote <<< "ls -la files/*.bz2" 1> fileinincoming
 
 echo File in incoming
@@ -78,7 +78,7 @@ echo Incoming filename is $incomingfilename
 
 localfilesize=$(wc -c $filepath | cut -d" " -f1)
 echo "Remote filesize :"$incomingfilesize
-echo "Local filesize  :"$localfilesize
+echo "Local filesize  : "$localfilesize
 
 if [ $incomingfilesize -eq $localfilesize ] ;
 then
