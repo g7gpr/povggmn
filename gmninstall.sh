@@ -29,8 +29,12 @@ sudo apt-get install sshpass -y
 #install mutt
 sudo apt-get install ssmtp mutt -y
 
+
 #install rsync
 sudo apt-get install rsync -y
+
+#install psmisc
+sudo apt-get install psmisc -y
 
 #Do the installation
 ./install.sh
