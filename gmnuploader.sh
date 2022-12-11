@@ -20,25 +20,28 @@ echo Cameraname is : $cameraname
 
 logger -s -t $(whoami) Running uploader to $remote
 
-#Iterate through the local files looking for files which do not have a matching .uploaded file
+#Iterate through the local files looking for files which do not have a matching .confirmed file
 
 for file in ~/files/incoming/*.bz2
 do
 
-if [ $file -nt $file.confirmed ];
-then
-echo Worryingly $file is newer than confirmation
-rm $file.confirmed
-fi
 
 
 if [ -f $file.confirmed ] ;
 then
 echo $file.confirmed exists
+
+ if [ $file -nt $file.confirmed ];
+ then
+ echo Worryingly $file is newer than confirmation
+ rm $file.confirmed
+ filepath=$file
+ fi
+
 else
 echo $file.confirmed does not exist
 filepath=$file
-break
+#break
 fi
 
 done
