@@ -87,7 +87,7 @@ cd ..
 cd /home/gmn/source/RMS
 
 source /home/gmn/vRMS/bin/activate
-echo Running converter on $workindirectory
+echo Running converter on $workingdirectory
 python -m RMS.CamsConvert $workingdirectory -s $cams
 
 echo Copying zip file from $workingdirectory

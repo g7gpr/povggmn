@@ -36,12 +36,13 @@ echo $file.confirmed exists
  echo Worryingly $file is newer than confirmation
  rm $file.confirmed
  filepath=$file
+ break
  fi
 
 else
 echo $file.confirmed does not exist
 filepath=$file
-#break
+break
 fi
 
 done
@@ -87,11 +88,7 @@ if [ $incomingfilesize -eq $localfilesize ] ;
 then
 echo Local and remote file sizes are the same. Nothing do do.
 else
-echo Local and remote file sizes are different. Remove corrupt file from incoming.
-echo $incomingfilepath
-rmcommandstring="rm files/$incomingfilename"
-echo Command string is : $rmcommandstring
-sftp $remote <<< $rmcommandstring
+echo Local and remote file sizes are different. Do not remove corrupt file from incoming as this causes problems.
 
 fi
 
@@ -142,13 +139,13 @@ echo "File was uploaded successfully"
 touch $filepath.confirmed
 logger -s -t $unconfirmedfilename was found with the correct size at $remote
 else
-echo "File was not uploaded successfully, make an upload"
+echo "Local file size is different to remote file size, make an upload"
 #upload goes here
 sftp gmn.uwo.ca <<END
 cd files
 put $filepath
 END
-logger -s -t $(whoami) Uploaded $unconfirmedfilename because it was corrupted at $remote
+logger -s -t $(whoami) Uploaded $unconfirmedfilename because filesize was different at $remote
 rm ~/.uploaderrunning
 exit 3
 fi
