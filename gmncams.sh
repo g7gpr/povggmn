@@ -157,12 +157,12 @@ gmn=9999
 if [ "$location" = "pioneer" ]; then
 echo Handling location Pioneer
 
-if [ "$cams" = "au000u" ]; then gmn=7081; fi
-if [ "$cams" = "au000v" ]; then gmn=7082; fi
-if [ "$cams" = "au000w" ]; then gmn=7083; fi
-if [ "$cams" = "au000x" ]; then gmn=7084; fi
-if [ "$cams" = "au000y" ]; then gmn=7085; fi
-if [ "$cams" = "au000z" ]; then gmn=7086; fi
+if [ "$gmn" = "au000u" ]; then cams=7081; fi
+if [ "$gmn" = "au000v" ]; then cams=7082; fi
+if [ "$gmn" = "au000w" ]; then cams=7083; fi
+if [ "$gmn" = "au000x" ]; then cams=7084; fi
+if [ "$gmn" = "au000y" ]; then cams=7085; fi
+if [ "$gmn" = "au000z" ]; then cams=7086; fi
 
 
 fi
@@ -172,14 +172,14 @@ fi
 if [ "$location" = "walnut" ]; then
 echo Handling location Walnut
 
-if [ "$cams" = "au000a" ]; then gmn=7087; fi
-if [ "$cams" = "au000c" ]; then gmn=7088; fi
-if [ "$cams" = "au000d" ]; then gmn=7089; fi
-if [ "$cams" = "au000e" ]; then gmn=7090; fi
-if [ "$cams" = "au000f" ]; then gmn=7091; fi
-if [ "$cams" = "au000g" ]; then gmn=7092; fi
-if [ "$cams" = "au000h" ]; then gmn=7093; fi
-if [ "$cams" = "au000k" ]; then gmn=7094; fi
+if [ "$gmn" = "au000a" ]; then cams=7087; fi
+if [ "$gmn" = "au000c" ]; then cams=7088; fi
+if [ "$gmn" = "au000d" ]; then cams=7089; fi
+if [ "$gmn" = "au000e" ]; then cams=7090; fi
+if [ "$gmn" = "au000f" ]; then cams=7091; fi
+if [ "$gmn" = "au000g" ]; then cams=7092; fi
+if [ "$gmn" = "au000h" ]; then cams=7093; fi
+if [ "$gmn" = "au000k" ]; then cams=7094; fi
 
 
 
@@ -189,21 +189,21 @@ fi
 if [ "$location" = "bonney" ]; then
 echo Handling location Bonney
 
-if [ "$cams" = "au0004" ]; then gmn=7095; fi
-if [ "$cams" = "au0006" ]; then gmn=7096; fi
-if [ "$cams" = "au0007" ]; then gmn=7097; fi
-if [ "$cams" = "au0008" ]; then gmn=7098; fi
-if [ "$cams" = "au0009" ]; then gmn=7099; fi
-if [ "$cams" = "au000l" ]; then gmn=7100; fi
+if [ "$gmn" = "au0004" ]; then cams=7095; fi
+if [ "$gmn" = "au0006" ]; then cams=7096; fi
+if [ "$gmn" = "au0007" ]; then cams=7097; fi
+if [ "$gmn" = "au0008" ]; then cams=7098; fi
+if [ "$gmn" = "au0009" ]; then cams=7099; fi
+if [ "$gmn" = "au000l" ]; then cams=7100; fi
 
-if [ "$cams" = "au000a" ]; then gmn=7107; fi
-if [ "$cams" = "au000c" ]; then gmn=7108; fi
-if [ "$cams" = "au000d" ]; then gmn=7109; fi
-if [ "$cams" = "au000e" ]; then gmn=7110; fi
-if [ "$cams" = "au000f" ]; then gmn=7112; fi
-if [ "$cams" = "au000g" ]; then gmn=7113; fi
-if [ "$cams" = "au000h" ]; then gmn=7114; fi
-if [ "$cams" = "au000k" ]; then gmn=7115; fi
+if [ "$gmn" = "au000a" ]; then cams=7107; fi
+if [ "$gmn" = "au000c" ]; then cams=7108; fi
+if [ "$gmn" = "au000d" ]; then cams=7109; fi
+if [ "$gmn" = "au000e" ]; then cams=7110; fi
+if [ "$gmn" = "au000f" ]; then cams=7112; fi
+if [ "$gmn" = "au000g" ]; then cams=7113; fi
+if [ "$gmn" = "au000h" ]; then cams=7114; fi
+if [ "$gmn" = "au000k" ]; then cams=7115; fi
 
 
 
@@ -213,19 +213,19 @@ fi
 if [ "$location" = "lemon" ]; then
 echo Handling location Lemon Gum
 
-if [ "$cams" = "au0004" ]; then gmn=7101; fi
-if [ "$cams" = "au0006" ]; then gmn=7102; fi
-if [ "$cams" = "au0007" ]; then gmn=7103; fi
-if [ "$cams" = "au0008" ]; then gmn=7104; fi
-if [ "$cams" = "au0009" ]; then gmn=7105; fi
-if [ "$cams" = "au000l" ]; then gmn=7106; fi
+if [ "$gmn" = "au0004" ]; then cams=7101; fi
+if [ "$gmn" = "au0006" ]; then cams=7102; fi
+if [ "$gmn" = "au0007" ]; then cams=7103; fi
+if [ "$gmn" = "au0008" ]; then cams=7104; fi
+if [ "$gmn" = "au0009" ]; then cams=7105; fi
+if [ "$gmn" = "au000l" ]; then cams=7106; fi
 
 
 
 fi
 
 
-
+logger -s -t "$gmn at $location lat:$lat, lon:$lon assigned $cams"
 
 
 
