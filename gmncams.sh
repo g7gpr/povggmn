@@ -10,7 +10,7 @@ echo Converter already running - quit
 exit
 fi
 
-#touch /home/gmn/.$1converterrunning
+touch /home/gmn/.$1converterrunning
 
 echo "Converting to camera code "$cams
 
@@ -152,7 +152,7 @@ echo Location was at $location
 #au000y								7085
 #au000z								7086
 
-gmn=9999
+cams=9999
 
 if [ "$location" = "pioneer" ]; then
 echo Handling location Pioneer
@@ -225,7 +225,8 @@ if [ "$gmn" = "au000l" ]; then cams=7106; fi
 fi
 
 
-logger -s -t "$gmn at $location lat:$lat, lon:$lon assigned $cams"
+logger "camsconverter $gmn at $location lat:$lat, lon:$lon assigned $cams"
+echo   "$gmn at $location lat:$lat, lon:$lon assigned $cams"
 
 
 
@@ -237,8 +238,8 @@ cd ..
 
 
 #temporary code during development
-rm -rf $workingdirectory
-exit
+#rm -rf $workingdirectory
+#exit
 
 cd /home/gmn/source/RMS
 
