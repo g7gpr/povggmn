@@ -10,7 +10,7 @@ echo Converter already running - quit
 exit
 fi
 
-touch /home/gmn/.$1converterrunning
+#touch /home/gmn/.$1converterrunning
 
 echo "Converting to camera code "$cams
 
@@ -79,9 +79,60 @@ tar -xf $filename
 echo delete bz2 file
 rm $filename
 
+grep latitude .config
+lat=$(grep latitude .config | cut -d":" -f2 | cut -d";" -f1)
+lon=$(grep longitude .config | cut -d":" -f2 | cut -d";" -f1) 
+
+echo Station $gmn at lat : $lat , lon : $lon
+
+
+#pioneer
+
+slat=-31.38779476
+slon=116.0884533
+distpioneer=$(echo "sqrt(($slat-$lat)^2+($slon-$lon)^2)" | bc -l)
+echo Distance to Pioneer = $distpioneer
+
+#walnut
+
+slat=-32.0075881
+slon=116.1356884
+distwalnut=$(echo "sqrt(($slat-$lat)^2+($slon-$lon)^2)" | bc -l)
+echo Distance to Walnut = $distwalnut
+
+#bonney
+
+slat=-33.3347585
+slon=115.8229926
+distbonney=$(echo "sqrt(($slat-$lat)^2+($slon-$lon)^2)" | bc -l)
+echo Distance to Bonney = $distbonney
+
+#lemongum
+
+slat=-32.3543442
+slon=115.80600764
+distlemon=$(echo "sqrt(($slat-$lat)^2+($slon-$lon)^2)" | bc -l)
+echo Distance to Lemon Gum = $distlemon
+
+threshold=0.01
+
+if (( $(echo "$distpioneer<$threshold" | bc -l) )); then location=pioneer ; fi
+
+
+echo Location was at $location
+
+
+#Table of allocationx
+
+
 
 echo Change up a directory
 cd ..
+
+
+#temporary code during development
+rm -rf $workingdirectory
+exit
 
 cd /home/gmn/source/RMS
 
