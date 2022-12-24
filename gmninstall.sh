@@ -35,6 +35,7 @@ sudo apt-get install rsync -y
 
 #install psmisc
 sudo apt-get install psmisc -y
+sudo apt-get install bc -y
 
 #Do the installation
 ./install.sh
