@@ -39,9 +39,9 @@ then
 
 logger -s -t $(whoami) in systembooted
 mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
-#~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
-#/home/gmn/scripts/povggmn/gmnsshrsync.sh
+~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 logger -s -t $(whoami) RMS_Update completed
+/home/gmn/scripts/povggmn/gmnsshrsync.sh
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
 sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
@@ -87,16 +87,13 @@ then
 
 #else
 
-logger -s -t $(whoami) Starting final routines, no other camera in process
 mv /home/gmn/states/camerasstopped/$(whoami) /home/gmn/states/runningfinalroutines/$(whoami)
 username=$(whoami)
 logger -s -t $(whoami) in camerasstopped
-#/home/gmn/scripts/povggmn/gmnsetcameraparamsday.sh						#set to day mode
-logger -s -t $(whoami) set to day mode
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run trackstack
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
-/home/gmn/scripts/povggmn/gmnrsync.sh $1
+/home/gmn/scripts/povggmn/gmnsshrsync.sh 
 python -m Utils.TrackStack $latestdirectory 
 sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
@@ -147,8 +144,7 @@ cp ~/source/RMS/mask.bmp             /home/gmn/$(hostname)/$(whoami)/
 cp ~/source/RMS/.config              /home/gmn/$(hostname)/$(whoami)/
 cp ~/source/RMS/platepar_cmn2010.cal /home/gmn/$(hostname)/$(whoami)/
 sshpass -p $1 scp -r  /home/gmn/$hostname/$(whoami)         gmndata@192.168.1.230:/home/gmndata/stations
-
-
+sudo killall rsync
 sleep 600
 sudo reboot
 else

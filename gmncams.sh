@@ -1,37 +1,50 @@
 #!/bin/bash
-cd /home/gmn/sendtoseti/validation
-rm *
+
+#Convert .bz2 to cams format
+
+gmn=$1
+
+if [ -f /home/gmn/.$1converterrunning ]; 
+then
+echo Converter already running - quit
+exit
+fi
+
+touch /home/gmn/.$1converterrunning
+
+echo "Converting to camera code "$cams
+
+if [ $(ls /home/$gmn/files/incoming/*.bz2 | wc -l) -eq '0' ]
+then
+echo No .bz2 files to work on
+rm  /home/gmn/.$1converterrunning
+exit
+fi
 
 
-for file in /home/gmn/sendtoseti/*.zip
+#Iterate through the local files looking for files which do not have a matching .camsconverted
+
+for file in /home/$gmn/files/incoming/*.bz2
 do
-cd /home/gmn/sendtoseti/
-mkdir unzipdirectory
-echo $file
-cp $file /home/gmn/sendtoseti/unzipdirectory
-cd unzipdirectory
-rm *
-unzip $file
-CAMNUMBER=$(grep "Camera number" CAL*.txt | cut -d'=' -f2 | xargs)
-LATITUDE=$(grep "Latitude" CAL*.txt | cut -d'=' -f2 | xargs)
-LONGITUDE=$(grep "Longitude" CAL*.txt | cut -d'=' -f2 | xargs)
-echo $LATITUDE $LONGITUDE
-CALDATE=$(grep "Calibration date" CAL*.txt | cut -d'=' -f2 | xargs)
-OBSDATE=$(basename ${file})
-DOM=$(echo $OBSDATE | cut -d'_' -f3)
-MOY=$(echo $OBSDATE | cut -d'_' -f2)
-YEAR=$(echo $OBSDATE | cut -d'_' -f1)
-CALDATE=$YEAR$MOY$DOM
-echo CALDATE = $CALDATE
-cd ..
+
+if [ $file -nt $file.camsconverted ];
+then
+echo Worryingly $file is newer than confirmation
+rm $file.camsconverted
+fi
 
 
-rm -rf unzipdirectory
-touch /home/gmn/sendtoseti/validation/$CAMNUMBER.$CALDATE.$LATITUDE.$LONGITUDE
-echo  /home/gmn/sendtoseti/validation/$CAMNUMBER.$CALDATE.$LATITUDE.$LONGITUDE
+if [ -f $file.camsconverted ] ;
+then
+echo $file.camsconverted exists
+else
+echo $file.camsconverted does not exist
+filepath=$file
+break
+fi
+
 done
 
-exit 0
 
 if [ -z "$filepath" ];
 then
@@ -150,6 +163,11 @@ if [ "$gmn" = "au000w" ]; then cams=7083; fi
 if [ "$gmn" = "au000x" ]; then cams=7084; fi
 if [ "$gmn" = "au000y" ]; then cams=7085; fi
 if [ "$gmn" = "au000z" ]; then cams=7086; fi
+
+if [ "$gmn" = "au0011" ]; then cams=7081; fi
+if [ "$gmn" = "au0012" ]; then cams=7082; fi
+if [ "$gmn" = "au0013" ]; then cams=7083; fi
+
 
 
 fi

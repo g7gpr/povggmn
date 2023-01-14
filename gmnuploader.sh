@@ -20,21 +20,25 @@ echo Cameraname is : $cameraname
 
 logger -s -t $(whoami) Running uploader to $remote
 
-#Iterate through the local files looking for files which do not have a matching .uploaded file
+#Iterate through the local files looking for files which do not have a matching .confirmed file
 
 for file in ~/files/incoming/*.bz2
 do
 
-if [ $file -nt $file.confirmed ];
-then
-echo Worryingly $file is newer than confirmation
-rm $file.confirmed
-fi
 
 
 if [ -f $file.confirmed ] ;
 then
 echo $file.confirmed exists
+
+ if [ $file -nt $file.confirmed ];
+ then
+ echo Worryingly $file is newer than confirmation
+ rm $file.confirmed
+ filepath=$file
+ break
+ fi
+
 else
 echo $file.confirmed does not exist
 filepath=$file
@@ -64,7 +68,7 @@ then
 echo Incoming is empty
 else
 echo Incoming is not empty - which is strange, why is the file still there? Is it corrupted?
-cd ~/files/testing
+
 sftp $remote <<< "ls -la files/*.bz2" 1> fileinincoming
 
 echo File in incoming
@@ -78,17 +82,13 @@ echo Incoming filename is $incomingfilename
 
 localfilesize=$(wc -c $filepath | cut -d" " -f1)
 echo "Remote filesize :"$incomingfilesize
-echo "Local filesize  :"$localfilesize
+echo "Local filesize  : "$localfilesize
 
 if [ $incomingfilesize -eq $localfilesize ] ;
 then
 echo Local and remote file sizes are the same. Nothing do do.
 else
-echo Local and remote file sizes are different. Remove corrupt file from incoming.
-echo $incomingfilepath
-rmcommandstring="rm files/$incomingfilename"
-echo Command string is : $rmcommandstring
-sftp $remote <<< $rmcommandstring
+echo Local and remote file sizes are different. Do not remove corrupt file from incoming as this causes problems.
 
 fi
 
@@ -139,13 +139,13 @@ echo "File was uploaded successfully"
 touch $filepath.confirmed
 logger -s -t $unconfirmedfilename was found with the correct size at $remote
 else
-echo "File was not uploaded successfully, make an upload"
+echo "Local file size is different to remote file size, make an upload"
 #upload goes here
 sftp gmn.uwo.ca <<END
 cd files
 put $filepath
 END
-logger -s -t $(whoami) Uploaded $unconfirmedfilename because it was corrupted at $remote
+logger -s -t $(whoami) Uploaded $unconfirmedfilename because filesize was different at $remote
 rm ~/.uploaderrunning
 exit 3
 fi
