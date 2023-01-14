@@ -6,6 +6,9 @@ echo lemongum
 /home/gmn/scripts/povggmn/gmnrelaystatus.sh au0008
 /home/gmn/scripts/povggmn/gmnrelaystatus.sh au0009
 /home/gmn/scripts/povggmn/gmnrelaystatus.sh au000l
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au0011
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au0012
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au0013
 echo
 echo
 echo walnut
@@ -32,7 +35,8 @@ echo
 echo
 echo overall
 echo
-/home/gmn/scripts/povggmn/gmnrelaystatus.sh "au000*"
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh "au00*"
+echo sent to seti : $(ls /home/gmn/sendtoseti/*.senttoseti | wc -l)
 echo
 echo cams processes running: $(ls /home/gmn/.au* | wc -l)
 ls /home/gmn/.au* -lhtr

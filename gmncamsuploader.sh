@@ -57,6 +57,14 @@ fi
 echo Starting upload to cams of $filepath
 filename=${filepath##*/}
 
+if [[ $filename =~ "9999" ]] ; then 
+ echo This is not valid - camera 9999
+ touch $filepath.senttoseti
+
+ exit 1
+fi
+
+
 echo Which has the filename $filename
 
 cd /home/gmn/sendtoseti

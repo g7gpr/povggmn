@@ -164,6 +164,11 @@ if [ "$gmn" = "au000x" ]; then cams=7084; fi
 if [ "$gmn" = "au000y" ]; then cams=7085; fi
 if [ "$gmn" = "au000z" ]; then cams=7086; fi
 
+if [ "$gmn" = "au0011" ]; then cams=7081; fi
+if [ "$gmn" = "au0012" ]; then cams=7082; fi
+if [ "$gmn" = "au0013" ]; then cams=7083; fi
+
+
 
 fi
 
