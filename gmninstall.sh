@@ -34,11 +34,18 @@ sudo apt-get install ssmtp mutt -y
 
 
 #Clean up
-rm install.sh
-rm opencv4_install.sh
+#rm install.sh
+#rm opencv4_install.sh
 
 #Make the outbox directory
 sudo mkdir /home/gmn/outbox
 sudo chmod a=rwx /home/gmn/outbox
 /home/gmn/scripts/povggmn/gmninitstates.sh
+
+#This helps to get SkyFit2 working
+~/source/RMS/Scripts/RMS_Update.sh
+source ~/vRMS/bin/activiate
+python -m pip install --upgrade  pip
+pip uninstall opencv-python
+pip install opencv-python-headless
 
