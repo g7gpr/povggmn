@@ -46,9 +46,9 @@ done
 
 if [ -z "$filepath" ];
 then
-echo "No files without camsconverted"
-logger -s -t $(whoami) Nothing left to convert
-rm /home/gmn/.camsuploaderunning
+echo "No files without senttoseti"
+logger -s -t $(whoami) Nothing left to send
+rm /home/gmn/.camsuploaderrunning
 exit
 else
 echo "File needs to be sent to cams"
@@ -59,8 +59,8 @@ filename=${filepath##*/}
 
 if [[ $filename =~ "9999" ]] ; then 
  echo This is not valid - camera 9999
- touch $filepath.senttoseti
-
+ mv $filepath /home/gmn/sendtoseti/qu
+ rm /home/gmn/.camsuploaderrunning
  exit 1
 fi
 

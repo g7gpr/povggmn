@@ -152,6 +152,12 @@ echo Location was at $location
 #au000y								7085
 #au000z								7086
 
+#au0011								7081
+#au0012								7082
+#au0013								7083
+
+
+
 cams=9999
 
 if [ "$location" = "pioneer" ]; then
