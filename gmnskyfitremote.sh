@@ -52,9 +52,6 @@ onehouragofile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFile
 twohouragofile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | tail  -n720 |  head -n1'`
 firsthourfile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | head  -n720 |  tail -n1'`
 #Run trackstack in penultimate directory
-sshcommand='source ~/vRMS/bin/activate; cd ~/source/RMS ; python -m Utils.TrackStack ~/RMS_data/CapturedFiles/'$penultimatedirectory' >/dev/null'
-echo Remote command for trackstack is $sshcommand
-`sshpass -p $2 ssh $1 $sshcommand ; sshpass -p $2 scp $1:/home/$username/RMS_data/CapturedFiles/$penultimatedirectory/*_track_stack.jpg ~/platepars/$username/penultimate/` & >/dev/null  2>&1
 
 echo Latestfile = $latestfile
 echo Onehouragofile = $onehouragofile
