@@ -26,6 +26,6 @@ echo $captured
 #commandstring=$commandstring'   '$captured
 done
 cd ~/source/RMS
-commandstring='python Utils/TrackStack2.py '$commandstring'  -c . -o /home/gmn/outbox '$1
+commandstring='python Utils/TrackStack.py '$commandstring'  -c . -f4 -o /home/gmn/outbox '$1
 echo $commandstring
 $commandstring
