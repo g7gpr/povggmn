@@ -94,7 +94,7 @@ latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run 
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
 /home/gmn/scripts/povggmn/gmnsshrsync.sh 
-python -m Utils.TrackStack $latestdirectory 
+python -m Utils.TrackStack $latestdirectory --constellations
 sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
 cp $latestdirectory/*_track* /home/gmn/outbox
