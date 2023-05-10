@@ -6,10 +6,6 @@ import os
 import shutil
 import datetime
 
-eventslocation = "/home/david/Dropbox/events"
-cameralistlocation = "/mnt/baldivis/home/gmn/cameras"
-RMSRoot = "/mnt/baldivis/home/"
-RMS_data = "RMS_data/CapturedFiles/"
 
 
 def geteventslist(eventslocation):
@@ -140,6 +136,11 @@ if __name__ == '__main__':
     print("Collator started")
     stationname = os.popen("hostname").read().strip()
     username = os.popen("whoami").read().strip()
+    eventslocation = "/home/" + username + "/Dropbox/events"
+    cameralistlocation = "/home/gmn/cameras"
+    RMSRoot = "/mnt/baldivis/home/"
+    RMS_data = "RMS_data/CapturedFiles/"
+
     print("Station Name : {}".format(stationname))
     print("User Name : {}".format(username))
 
