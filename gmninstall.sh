@@ -52,7 +52,7 @@ sudo chmod a=rwx /home/gmn/outbox
 
 #This helps to get SkyFit2 working
 ~/source/RMS/Scripts/RMS_Update.sh
-source ~/vRMS/bin/activiate
+source ~/vRMS/bin/activate
 python -m pip install --upgrade  pip
 pip uninstall opencv-python
 pip install opencv-python-headless

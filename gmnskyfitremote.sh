@@ -50,6 +50,8 @@ echo penultimatedirectory is $penultimatedirectory
 latestfile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | tail  -n1'`
 onehouragofile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | tail  -n360 |  head -n1'`
 twohouragofile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | tail  -n720 |  head -n1'`
+threehouragofile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | tail  -n1080 |  head -n1'`
+fourhouragofile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | tail  -n1440 |  head -n1'`
 firsthourfile=`sshpass -p $2 ssh $1 'ls /home/'$username'/RMS_data/CapturedFiles/'$latestdirectory'/*.fits | head  -n720 |  tail -n1'`
 #Run trackstack in penultimate directory
 
@@ -64,6 +66,8 @@ echo 25%
 sshpass -p $2 scp $1:$onehouragofile ~/platepars/$username/
 echo 50%
 sshpass -p $2 scp $1:$twohouragofile ~/platepars/$username/
+sshpass -p $2 scp $1:$threehouragofile ~/platepars/$username/
+sshpass -p $2 scp $1:$fourhouragofile ~/platepars/$username/
 echo 75%
 sshpass -p $2 scp $1:$firsthourfile ~/platepars/$username/
 echo 100%
@@ -71,7 +75,7 @@ echo 100%
 #now get some files for context. This can be done in the background as not required for platepar development
 echo Copying other files
 sshpass -p $2 scp $1:/home/$username/RMS_data/CapturedFiles/$penultimatedirectory/*.bmp ~/platepars/$username/penultimate 
-sshpass -p $2 scp $1:/home/$username/RMS_data/live.jpg ~/platepars/$username/$username.jpg &
+sshpass -p $2 scp $1:/home/$username/RMS_data/live.jpg ~/platepars/$username/$username.jpg 
 sshpass -p $2 scp $1:/home/$username/source/RMS/mask.bmp ~/platepars/$username/penultimate/mask.bmp 
 composite -blend 30  ~/platepars/$username/penultimate/mask.bmp    ~/platepars/$username/penultimate/flat.bmp ~/platepars/$username/penultimate/flatandmask.bmp
 sshpass -p $2 scp $1:/home/$username/RMS_data/CapturedFiles/$latestdirectory/*.jpg ~/platepars/$username/ &
