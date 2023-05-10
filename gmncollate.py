@@ -127,7 +127,7 @@ def copyfiles(station, camera, event, cameradirectory):
                                                                  " " + cameradirectory
                  os.system(shellcommand)
                  #convert bin files to mp4
-                 shellcommand = "~/scripts/bintomp4.sh " + cameradirectory
+                 shellcommand = "~/scripts/povggmn/bintomp4.sh " + cameradirectory
 
                  print(shellcommand)
                  os.system(shellcommand)
