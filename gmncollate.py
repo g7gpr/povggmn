@@ -132,8 +132,10 @@ def copyfiles(station, camera, event, cameradirectory):
                                                                  " " + cameradirectory
                  os.system(shellcommand)
                  #convert bin files to mp4
-                 shellcommand = "~/scripts/bintomp4.sh " + cameradirectory
-
+                 shellcommand = "~/scripts/bintomp4.sh " + cameradirectory + "; "
+                 print("Station name is {}".format(stationname))
+                 print("Camera directory is {}".format(cameradirectory))
+                 shellcommand += "for f in " + cameradirectory + "/*.mp4 ; do mv $f "  + cameradirectory + "/../../videoandimages/" + stationname + "_${f##*/} ; done"
                  print(shellcommand)
                  os.system(shellcommand)
 
@@ -142,7 +144,10 @@ if __name__ == '__main__':
     stationname = os.popen("hostname").read().strip()
     username = os.popen("whoami").read().strip()
     eventslocation = "/home/" + username + "/Dropbox/events"
-    RMSRoot = "/home"
+    if stationname == "svr08":
+        RMSRoot = "/mnt/baldivis/home"
+    else:
+        RMSRoot = "/home"
     cameralistlocation = RMSRoot + "/gmn/cameras"
 
     RMS_data = "RMS_data/CapturedFiles/"
