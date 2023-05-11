@@ -36,7 +36,8 @@ def collatedata(station, event):
         cameradirectory = os.path.join(stationdirectory, camera)
         os.mkdir(cameradirectory)
         copyfiles(station, camera, event, cameradirectory)
-
+        shellcommand = "/home/" + username + "/scripts/povggmn/gmnskymap.sh " + stationdirectory
+        os.system(shellcommand)
 
 def convertgmntimetoposix(event):
     try:
@@ -98,10 +99,14 @@ def copyfiles(station, camera, event, cameradirectory):
                 if relevantfilesfound:
                  #convert the fits to jpg
                  shellcommand = "cd " + cameradirectory + ";"
-                 shellcommand += "for f in *.fits; do convert -flip $f ${f%.*}.bmp; cp ${f%.*}.bmp composite.bmp; done;"
-                 shellcommand += "for f in *.fits; do convert -flip $f ${f%.*}.jpg; done;"
-                 shellcommand += "/home/" + username + "/scripts/povggmn/gmnstack.sh " + cameradirectory + "  " + camera + ";"
-                 shellcommand += "mv " + cameradirectory + "/" + camera + "_stack.jpg " + cameradirectory + "/.."
+                 shellcommand += "cd ../../ ; mkdir -p videoandimages;"
+                 shellcommand += "cd " + cameradirectory + ";"
+                 shellcommand += "for f in *.fits; do convert -flip $f ${f%.*}.jpg; cp ${f%.*}.jpg ../../videoandimages/" + stationname + "_${f%.*}.jpg; done;"
+                 shellcommand += "/home/" + username + "/scripts/povggmn/gmnstack.sh " + cameradirectory + "  " + stationname + "_" + camera + ";"
+                 shellcommand += "mv " + cameradirectory + "/" + stationname + "_" + camera + "_stack.jpg " + cameradirectory + "/../../videoandimages/"
+
+
+
                  print(shellcommand)
                  os.system(shellcommand)
                  #copy the .config file
@@ -127,7 +132,7 @@ def copyfiles(station, camera, event, cameradirectory):
                                                                  " " + cameradirectory
                  os.system(shellcommand)
                  #convert bin files to mp4
-                 shellcommand = "~/scripts/povggmn/bintomp4.sh " + cameradirectory
+                 shellcommand = "~/scripts/bintomp4.sh " + cameradirectory
 
                  print(shellcommand)
                  os.system(shellcommand)
@@ -137,8 +142,9 @@ if __name__ == '__main__':
     stationname = os.popen("hostname").read().strip()
     username = os.popen("whoami").read().strip()
     eventslocation = "/home/" + username + "/Dropbox/events"
-    cameralistlocation = "/home/gmn/cameras"
-    RMSRoot = "/home"
+    RMSRoot = "/mnt/baldivis/home"
+    cameralistlocation = RMSRoot + "/gmn/cameras"
+
     RMS_data = "RMS_data/CapturedFiles/"
 
     print("Station Name : {}".format(stationname))
