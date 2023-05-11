@@ -142,7 +142,7 @@ if __name__ == '__main__':
     stationname = os.popen("hostname").read().strip()
     username = os.popen("whoami").read().strip()
     eventslocation = "/home/" + username + "/Dropbox/events"
-    RMSRoot = "/mnt/baldivis/home"
+    RMSRoot = "/home"
     cameralistlocation = RMSRoot + "/gmn/cameras"
 
     RMS_data = "RMS_data/CapturedFiles/"
