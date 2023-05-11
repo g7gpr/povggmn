@@ -101,7 +101,7 @@ def copyfiles(station, camera, event, cameradirectory):
                  shellcommand = "cd " + cameradirectory + ";"
                  shellcommand += "cd ../../ ; mkdir -p videoandimages;"
                  shellcommand += "cd " + cameradirectory + ";"
-                 shellcommand += "for f in *.fits; do convert -flip $f ${f%.*}.jpg; cp ${f%.*}.jpg ../../videoandimages/" + stationname + "_${f%.*}.jpg; done;"
+                 shellcommand += "for f in *.fits; do convert -flip $f ${f%.*}.jpg;  done;"
                  shellcommand += "/home/" + username + "/scripts/povggmn/gmnstack.sh " + cameradirectory + "  " + stationname + "_" + camera + ";"
                  shellcommand += "mv " + cameradirectory + "/" + stationname + "_" + camera + "_stack.jpg " + cameradirectory + "/../../videoandimages/"
 
