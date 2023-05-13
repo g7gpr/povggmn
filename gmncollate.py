@@ -130,6 +130,9 @@ def copyfiles(station, camera, event, cameradirectory):
                  # copy any ecsv files
                  shellcommand = "cp " + nightdirectoryfullpath + "/*.ecsv" \
                                                                  " " + cameradirectory
+                 # copy the mask - this just makes the fox skymap nicer
+                 shellcommand = "cp " + nightdirectoryfullpath + "/../../../source/RMS/mask.bmp " + cameradirectory
+
                  os.system(shellcommand)
                  #convert bin files to mp4
                  shellcommand = "~/scripts/povggmn/bintomp4.sh " + cameradirectory + "; "
