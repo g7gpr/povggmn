@@ -16,7 +16,7 @@ touch ~/.uploaderrunning
 remote='gmn.uwo.ca'
 cameraname=$(whoami | tr '[:lower:]' '[:upper:]')
 echo Cameraname is : $cameraname
-/home/gmn/scripts/povggmn/gmnsleep.sh $(whoami)
+#/home/gmn/scripts/povggmn/gmnsleep.sh $(whoami)
 
 logger -s -t $(whoami) Running uploader to $remote
 
@@ -25,11 +25,9 @@ logger -s -t $(whoami) Running uploader to $remote
 for file in ~/files/incoming/*.bz2
 do
 
-
-
 if [ -f $file.confirmed ] ;
 then
-echo $file.confirmed exists
+#echo $file.confirmed exists
 
  if [ $file -nt $file.confirmed ];
  then
@@ -89,6 +87,15 @@ then
 echo Local and remote file sizes are the same. Nothing do do.
 else
 echo Local and remote file sizes are different. Do not remove corrupt file from incoming as this causes problems.
+
+sftp gmn.uwo.ca <<END
+cd files
+put $filepath
+END
+logger -s -t $(whoami) Uploaded $unconfirmedfilename because it was not found on $remote
+rm ~/.uploaderrunning
+exit 2
+
 
 fi
 
