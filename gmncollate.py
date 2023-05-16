@@ -136,9 +136,11 @@ def copyfiles(station, camera, event, cameradirectory):
                  os.system(shellcommand)
                  #convert bin files to mp4
                  shellcommand = "~/scripts/povggmn/bintomp4.sh " + cameradirectory + "; "
+                 shellcommand += "~/scripts/povggmn/bintomosaic.sh " + cameradirectory + "; "
                  print("Station name is {}".format(stationname))
                  print("Camera directory is {}".format(cameradirectory))
-                 shellcommand += "for f in " + cameradirectory + "/*.mp4 ; do mv $f "  + cameradirectory + "/../../videoandimages/" + stationname + "_${f##*/} ; done"
+                 shellcommand += "for f in " + cameradirectory + "/*.mp4 ; do mv $f "  + cameradirectory + "/../../videoandimages/" + stationname + "_${f##*/} ; done ; "
+                 shellcommand += "for f in " + cameradirectory + "/*mosaic.png ; do mv $f "  + cameradirectory + "/../../videoandimages/" + stationname + "_${f##*/} ; done"
                  print(shellcommand)
                  os.system(shellcommand)
 
