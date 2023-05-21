@@ -16,7 +16,7 @@ username=$(whoami)
 
 echo Username is $username
 mkdir -p /home/gmn/cameras/
-mkdir -p /home/gmn/$(hostname)/$(whoami)
+mkdir -p /home/gmn/$(whoami)
 
 
 
@@ -24,8 +24,7 @@ echo Writing the ip address
 ipaddress=$(hostname -I)
 echo ip address : $ipaddress
 echo "$ipaddress" > /home/$(whoami)/RMS_data/$(whoami)".ip"
-
-sshpass -p $1 scp   /home/$username/RMS_data/$(whoami)".ip" gmndata@192.168.1.230:/home/gmndata/
+scp   /home/$username/RMS_data/$(whoami)".ip" gmndata@192.168.1.230:~/$(hostname).ip
 
 cd ~/source/RMS
 source ~/vRMS/bin/activate
@@ -43,8 +42,8 @@ mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(wh
 logger -s -t $(whoami) RMS_Update completed
 /home/gmn/scripts/povggmn/gmnsshrsync.sh
 /home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
-sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
-sshpass -p $1 ssh gmndata@192.168.1.230 "mkdir -p ~/$(whoami)/latest/"
+ssh gmndata@192.168.1.230 "mkdir -p ~/liveimages"
+ssh gmndata@192.168.1.230 "mkdir -p ~/$(hostname)/$(whoami)/latest/"
 
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
 logger -s -t $(whoami) in ready to start state
@@ -66,10 +65,10 @@ if test -f /home/gmn/states/camerasrunning/$(whoami)						#is this camera runnin
 then
 
 logger -s -t $(whoami) writing live image							#do the routine work whilst the camera is runing
-sshpass -p $1 scp ~/RMS_data/live.jpg gmndata@192.168.1.230:/home/gmndata/liveimages/$(whoami).jpg
+scp ~/RMS_data/live.jpg                gmndata@192.168.1.230:~/$(hostname)/$(whoami).jpg
 
 ip a | grep 10.8. | cut -c 10-18 > ~/RMS_data/ipaddress
-sshpass -p $1 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:/home/gmndata/$(whoami)/ipaddress
+scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:~/$(hostname)/$(whoami)/ipaddress
 
 fi
 
@@ -95,14 +94,14 @@ latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
 /home/gmn/scripts/povggmn/gmnsshrsync.sh 
 python -m Utils.TrackStack $latestdirectory --constellations
-sshpass -p $1 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
-sshpass -p $1 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(whoami)/latest
+scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
+scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 cp $latestdirectory/*_track* /home/gmn/outbox
 backuptime=`date +%Y%m%d%H%M%S`
-backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
+cd backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
 echo Sending command
 echo $backupcommand
-sshpass -p $1 ssh gmndata@192.168.1.230 $backupcommand
+ssh gmndata@192.168.1.230 $backupcommand
 mv /home/gmn/states/runningfinalroutines/$(whoami) /home/gmn/states/readyforshutdown/$(whoami)
 logger -s -t $(whoami) Finished final routines
 
@@ -143,7 +142,7 @@ mv /home/gmn/states/runningfinalroutinesstation/$(whoami) /home/gmn/states/shutd
 cp ~/source/RMS/mask.bmp             /home/gmn/$(hostname)/$(whoami)/
 cp ~/source/RMS/.config              /home/gmn/$(hostname)/$(whoami)/
 cp ~/source/RMS/platepar_cmn2010.cal /home/gmn/$(hostname)/$(whoami)/
-sshpass -p $1 scp -r  /home/gmn/$hostname/$(whoami)         gmndata@192.168.1.230:/home/gmndata/stations
+scp -r  /home/gmn/$hostname/$(whoami)         gmndata@192.168.1.230:/home/gmndata/stations/$(hostname)
 sudo killall rsync
 sleep 600
 sudo reboot
