@@ -36,26 +36,4 @@ echo
 echo Outbox
 ls /home/gmn/outbox/
 
-echo
-echo Filestoupload
-more /home/*/RMS_data/*.inf | grep AU > ~/tmpfilestoupload
-gmnuploadfilesizes.sh ~/tmpfilestoupload
-echo
-echo Number of files : $(wc -l ~/tmpfilestoupload)
-echo
-
-MBtosend=$(gmnuploadfilesizes.sh ~/tmpfilestoupload | cut -d" " -f5 | paste -sd+ | bc -l)
-echo $MBtosend MB to be sent             
-
-
-
-rm ~/tmpfilestoupload
-
-cameraname=$(ls /home/gmn/cameras | head -n1)
-latestlog=$(ls -t /home/$cameraname/RMS_data/logs/log* | head -n1)
-starttimeline=$(grep "Next start" $latestlog | tail -n1)
-starttime=${starttimeline#*$Next start time:}
-starttimeseconds=$(date -u -d "${starttime%$*UTC}" +"%s")
-timenowseconds=$(date +%s)
-echo Start Time : $starttime : Seconds before next start : $(expr $starttimeseconds - $timenowseconds)
 '
