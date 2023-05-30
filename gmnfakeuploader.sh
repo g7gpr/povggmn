@@ -8,12 +8,12 @@ do
 
 
 
-if [ -f $file.confirmed ] ;
-then
-echo $file.confirmed exists
-else
-echo $file.confirmed does not exist
+#if [ -f $file.confirmed ] ;
+#then
+#echo $file.confirmed exists
+#else
+#echo $file.confirmed does not exist
 touch $file.confirmed
-fi
+#fi
 
 done

@@ -316,15 +316,15 @@ cd /home/gmn/source/RMS
 
 source /home/gmn/vRMS/bin/activate
 echo Running converter on $workingdirectory
-python -m RMS.CamsConvert $workingdirectory -s $cams
-
+echo  python -m RMS.CamsConvert $workingdirectory -c $workingdirectory/.config -s $cams
+python -m RMS.CamsConvert $workingdirectory -c $workingdirectory/.config -s $cams
 echo Copying zip file from $workingdirectory
 cp $workingdirectory/*.zip /home/gmn/sendtoseti/
 touch $file.camsconverted
+rm /home/gmn/.$1converterrunning
+exit
 
 echo Remove working directory $workingdirectory
 rm -rf $workingdirectory
 cd ~/files/incoming
-
-rm /home/gmn/.$1converterrunning
 
