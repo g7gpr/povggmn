@@ -114,12 +114,30 @@ slon=115.80600764
 distlemon=$(echo "sqrt(($slat-$lat)^2+($slon-$lon)^2)" | bc -l)
 echo Distance to Lemon Gum = $distlemon
 
+
+#coorinja
+slat=-31.59846
+slon=116.47393333
+distcoorinja=$(echo "sqrt(($slat-$lat)^2+($slon-$lon)^2)" | bc -l)
+echo Distance to Coorinja = $distcoorinja
+
+#rhodesdale
+slat=-33.417678
+slon=116.76217
+distrhodesdale=$(echo "sqrt(($slat-$lat)^2+($slon-$lon)^2)" | bc -l)
+echo Distance to Rhodesdale = $distrhodesdale
+
+
+
+
 threshold=0.01
 
 if (( $(echo "$distpioneer<$threshold" | bc -l) )); then location=pioneer ; fi
 if (( $(echo "$distwalnut<$threshold" | bc -l) )); then location=walnut ; fi
 if (( $(echo "$distbonney<$threshold" | bc -l) )); then location=bonney ; fi
 if (( $(echo "$distlemon<$threshold" | bc -l) )); then location=lemon ; fi
+if (( $(echo "$distcoorinja<$threshold" | bc -l) )); then location=coorinja ; fi
+if (( $(echo "$distrhodesdale<$threshold" | bc -l) )); then location=rhodesdale ; fi
 
 
 echo Location was at $location
@@ -127,7 +145,7 @@ echo Location was at $location
 
 #Table of allocationx
 
-#GMN ID		Bonney		Lemon		Walnut		Pioneer
+#GMN ID		Bonney		Lemon		Walnut		Pioneer		Coorinja	Rhodesdale
 #au000a		7107				7087
 #au000c		7108				7088
 #au000d		7109				7089
@@ -156,6 +174,19 @@ echo Location was at $location
 #au0012								7082
 #au0013								7083
 
+#au001u										7115
+#au001v										7116
+#au001w										7117
+#au001x										7118
+#au001y										7119
+#au001z										7120
+
+#au001a												7121
+#au001b												7122
+#au001c												7123
+#au001d												7124
+#au001e												7125
+#au001f												7126
 
 
 cams=9999
@@ -236,9 +267,38 @@ if [ "$gmn" = "au000l" ]; then cams=7106; fi
 fi
 
 
+if [ "$location" = "coorinja" ]; then
+echo Handling location Coorinja
+
+if [ "$gmn" = "au001u" ]; then cams=7115; fi
+if [ "$gmn" = "au001v" ]; then cams=7116; fi
+if [ "$gmn" = "au001w" ]; then cams=7117; fi
+if [ "$gmn" = "au001x" ]; then cams=7118; fi
+if [ "$gmn" = "au001y" ]; then cams=7119; fi
+if [ "$gmn" = "au001z" ]; then cams=7120; fi
+
+
+
+fi
+
+if [ "$location" = "rhodesdale" ]; then
+echo Handling location Rhodesdale
+
+if [ "$gmn" = "au001a" ]; then cams=7121; fi
+if [ "$gmn" = "au001b" ]; then cams=7122; fi
+if [ "$gmn" = "au001c" ]; then cams=7123; fi
+if [ "$gmn" = "au001d" ]; then cams=7124; fi
+if [ "$gmn" = "au001e" ]; then cams=7125; fi
+if [ "$gmn" = "au001f" ]; then cams=7126; fi
+
+
+
+fi
+
+
 logger "camsconverter $gmn at $location lat:$lat, lon:$lon assigned $cams"
 echo   "$gmn at $location lat:$lat, lon:$lon assigned $cams"
-
+sleep 10
 
 
 

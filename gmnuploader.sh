@@ -36,6 +36,12 @@ then
  filepath=$file
  break
  fi
+ 
+ if [ -f $file.uploaded ] ; 
+ then
+ echo Found an uploading lock file, will remove
+ rm $file.uploaded
+ fi
 
 else
 echo $file.confirmed does not exist
@@ -85,13 +91,17 @@ echo "Local filesize  : "$localfilesize
 if [ $incomingfilesize -eq $localfilesize ] ;
 then
 echo Local and remote file sizes are the same. Nothing do do.
+touch $filepath.uploaded
 else
 echo Local and remote file sizes are different. Do not remove corrupt file from incoming as this causes problems.
 
+touch $filepath.uploading
 sftp gmn.uwo.ca <<END
 cd files
 put $filepath
 END
+rm $filepath.uploading
+touch $filepath.uploaded
 logger -s -t $(whoami) Uploaded $unconfirmedfilename because it was not found on $remote
 rm ~/.uploaderrunning
 exit 2
@@ -124,10 +134,14 @@ if [ -z "$remotefilesize" ];
 then
 echo "File probably does not exist, make an upload"
 #upload goes here
+touch $filepath.uploading
 sftp gmn.uwo.ca <<END
 cd files
 put $filepath
 END
+rm $filepath.uploading
+echo Create uploaded marker $filepath.uploaded
+touch $filepath.uploaded
 logger -s -t $(whoami) Uploaded $unconfirmedfilename because it was not found on $remote
 rm ~/.uploaderrunning
 exit 2
@@ -144,6 +158,7 @@ if [ $localfilesize -eq $remotefilesize ];
 then
 echo "File was uploaded successfully"
 touch $filepath.confirmed
+rm $filepath.uploaded
 logger -s -t $unconfirmedfilename was found with the correct size at $remote
 else
 echo "Local file size is different to remote file size, make an upload"

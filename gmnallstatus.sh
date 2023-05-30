@@ -33,6 +33,29 @@ echo
 /home/gmn/scripts/povggmn/gmnrelaystatus.sh au000z
 echo
 echo
+echo rhodesdale
+echo
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001a
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001b
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001c
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001d
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001e
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001f
+echo
+echo
+echo coorinja
+echo
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001u
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001v
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001w
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001x
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001y
+/home/gmn/scripts/povggmn/gmnrelaystatus.sh au001z
+
+
+
+echo
+echo
 echo overall
 echo
 /home/gmn/scripts/povggmn/gmnrelaystatus.sh "au00*"
