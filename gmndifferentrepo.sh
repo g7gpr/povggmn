@@ -9,10 +9,11 @@ cd ~/source
 mv ~/source/RMS ~/source/RMS_backup
 git clone https://github.com/g7gpr/RMS
 cd ~/source/RMS
-cp ~/gmnbackup/$(whoami)/.config .
 cp ~/gmnbackup/$(whoami)/platepar_cmn2010.cal .
 cp ~/gmnbackup/$(whoami)/mask.bmp .
 Scripts/RMS_Update.sh
 git remote -v
+rm ~/source/RMS/.config
 git checkout eventmonitor
+cp ~/gmnbackup/$(whoami)/.config .
 git branch
