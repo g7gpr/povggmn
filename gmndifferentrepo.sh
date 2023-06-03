@@ -14,4 +14,4 @@ cp ~/gmnbackup/$(whoami)/platepar_cmn2010.cal .
 cp ~/gmnbackup/$(whoami)/mask.bmp .
 Scripts/RMS_Update.sh
 git remote -v
-
+git checkout eventmonitor
