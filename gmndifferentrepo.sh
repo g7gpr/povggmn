@@ -16,7 +16,7 @@ rm ~/source/RMS/mask.bmp
 rm ~/source/RMS/platepar_cmn2010.cal
 git checkout eventmonitor
 cp ~/gmnbackup/$(whoami)/.config .
-cp ~/gmnbackup/$(whoami)/mask.cmp . 
+cp ~/gmnbackup/$(whoami)/mask.bmp . 
 cp ~/gmnbackup/$(whoami)/platepar_cmn2010.cal . 
 
 git branch
