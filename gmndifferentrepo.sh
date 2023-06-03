@@ -15,3 +15,4 @@ cp ~/gmnbackup/$(whoami)/mask.bmp .
 Scripts/RMS_Update.sh
 git remote -v
 git checkout eventmonitor
+git branch
