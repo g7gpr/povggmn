@@ -22,7 +22,7 @@ logger -s -t $(whoami) Running uploader to $remote
 
 #Iterate through the local files looking for files which do not have a matching .confirmed file
 
-for file in ~/files/incoming/*.bz2
+for file in ~/files/incoming/AU*.bz2
 do
 
 if [ -f $file.confirmed ] ;
@@ -63,7 +63,7 @@ fi
 
 #check to see if remote server incoming space is free
 
-filesinincoming=$(sftp $remote <<<"ls files/*.bz2" | grep $cameraname | wc -l)
+filesinincoming=$(sftp $remote <<<"ls files/AU*.bz2" | grep $cameraname | wc -l)
 
 echo Files in incoming : $filesinincoming
 
@@ -73,7 +73,7 @@ echo Incoming is empty
 else
 echo Incoming is not empty - which is strange, why is the file still there? Is it corrupted?
 
-sftp $remote <<< "ls -la files/*.bz2" 1> fileinincoming
+sftp $remote <<< "ls -la files/AU*.bz2" 1> fileinincoming
 
 echo File in incoming
 incomingfilesize=$(more fileinincoming |   awk '{print  $5}')
