@@ -322,8 +322,6 @@ echo Copying zip file from $workingdirectory
 cp $workingdirectory/*.zip /home/gmn/sendtoseti/
 touch $file.camsconverted
 rm /home/gmn/.$1converterrunning
-exit
-
 echo Remove working directory $workingdirectory
 rm -rf $workingdirectory
 cd ~/files/incoming
