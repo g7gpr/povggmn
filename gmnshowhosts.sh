@@ -1,4 +1,8 @@
 #!/bin/bash
+ip=192.168.1.181
+ping -c 1 $ip &  /dev/null && echo $ip $(ssh -o StrictHostKeyChecking=no gmn@$ip "hostname") || echo $ip down
+ip=youndegin
+ping -c 1 $ip &> /dev/null && echo $ip $(ssh -o StrictHostKeyChecking=no gmn@$ip "hostname") || echo $ip down
 ip=10.8.0.6
 ping -c 1 $ip &> /dev/null && echo $ip $(ssh -o StrictHostKeyChecking=no gmn@$ip "hostname") || echo $ip down
 ip=10.8.0.10

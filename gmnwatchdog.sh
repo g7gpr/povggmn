@@ -65,6 +65,7 @@ then
 
 logger -s -t $(whoami) writing live image							#do the routine work whilst the camera is runing
 scp ~/RMS_data/live.jpg                gmndata@192.168.1.230:~/$(hostname)/$(whoami).jpg
+scp ~/source/RMS/mask.bmp              gmndata@192.168.1.230:~/$(hostname)/$(whoami)_mask.jpg
 
 ip a | grep 10.8. | cut -c 10-18 > ~/RMS_data/ipaddress
 scp /home/$username/RMS_data/ipaddress gmndata@192.168.1.230:~/$(hostname)/$(whoami)/ipaddress
