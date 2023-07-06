@@ -6,11 +6,12 @@ cp .config ~/gmnbackup/$(whoami)/.
 cp platepar_cmn2010.cal ~/gmnbackup/$(whoami)/.
 cp mask.bmp  ~/gmnbackup/$(whoami)/.
 cd ~/source
+rm -rf ~/source/RMS_backup
 mv ~/source/RMS ~/source/RMS_backup
-git clone https://github.com/CroatianMeteorNetwork/RMS
+git clone https://github.com/g7gpr/RMS
 cd ~/source/RMS
 Scripts/RMS_Update.sh
-git remote set-url origin https://github.com/CroatianMeteorNetwork/RMS
+git remote set-url origin https://github.com/g7gpr/RMS
 git remote -v
 rm ~/source/RMS/.config
 rm ~/source/RMS/mask.bmp
