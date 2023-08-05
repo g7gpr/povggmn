@@ -68,7 +68,7 @@ do
   #echo $last_bz2_file
   #echo $last_uploaded_file
   #echo $last_uploaded_file_without_extension
-  if [ "$last_uploaded_file_without_extension" = "$last_bz2_file" ]; then
+  if [ "$last_uploaded_file_without_extension" != "" ]; then # "$last_bz2_file" ]; then
   echo $(basename $last_uploaded_file_without_extension) $(stat -c%w $last_uploaded_file)
 fi
 done

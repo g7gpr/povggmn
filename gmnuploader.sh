@@ -163,10 +163,12 @@ logger -s -t $unconfirmedfilename was found with the correct size at $remote
 else
 echo "Local file size is different to remote file size, make an upload"
 #upload goes here
+touch $filepath.uploading
 sftp gmn.uwo.ca <<END
 cd files
 put $filepath
 END
+rm $filepath.uploading
 logger -s -t $(whoami) Uploaded $unconfirmedfilename because filesize was different at $remote
 rm ~/.uploaderrunning
 exit 3
