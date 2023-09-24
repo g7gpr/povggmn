@@ -13,8 +13,8 @@ do
 	mkdir -p $dirtime
 	cd $dirtime
 	tar -xf ../../archives/$f
-	mv *stack*.jpg ..
-	mv *.mp4 ..
+	#mv *stack*.jpg ..
+	#mv *.mp4 ..
 	cd ..
 	cd ..
 done
@@ -23,9 +23,10 @@ done
 echo Iterating folders
 source /home/gmn/vRMS/bin/activate
 
+
 for datepath in /home/event_monitor/files/*
 do
-   if [ $(basename($datepath)) != archives ] ; then
+   if [ $(basename $datepath) != archives ] ; then
    echo $datepath
 
    for timepath in $datepath/*
@@ -37,11 +38,18 @@ do
          do
 	    echo $group
 	    cd /home/gmn/source/RMS/
-	    python -m Utils.FOVSkyMap -n $group
+#	    python -m Utils.FOVSkyMap -n $group
 	    for camera in $group/*
-            do
+           do
+		echo copyying $camera/*stack*.jpg to $group
                 cp $camera/*stack*.jpg $group
             done
+	    for stack in $group/*.jpg
+            do 
+		targetname=$network/$(basename $group)_$(basename $stack) 
+	        echo copying $stack to $targetname
+                cp $stack              $targetname
+	    done
          done
      done
   done
