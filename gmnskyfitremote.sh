@@ -61,15 +61,15 @@ echo Twohouragofile = $twohouragofile
 echo Firsthourfile = $firsthourfile
 #start copying across
 echo 0%
-scp $1:$latestfile ~/platepars/$username/
+rsync -z --progress $1:$latestfile ~/platepars/$username/
 echo 25%
-scp $1:$onehouragofile ~/platepars/$username/
+rsync -z --progress $1:$onehouragofile ~/platepars/$username/
 echo 50%
-scp $1:$twohouragofile ~/platepars/$username/
-scp $1:$threehouragofile ~/platepars/$username/
-scp $1:$fourhouragofile ~/platepars/$username/
+rsync -z --progress $1:$twohouragofile ~/platepars/$username/
+rsync -z --progress $1:$threehouragofile ~/platepars/$username/
+rsync -z --progress $1:$fourhouragofile ~/platepars/$username/
 echo 75%
-scp $1:$firsthourfile ~/platepars/$username/
+rsync -z --progress $1:$firsthourfile ~/platepars/$username/
 echo 100%
 scp $1:"~/source/RMS/mask.bmp" ~/platepars/$username/
 
@@ -92,7 +92,7 @@ echo finished copying other files
 source ~/vRMS/bin/activate
 #change the the working directory
 cd ~/source/RMS/
-python -m Utils.SkyFit2 -c ~/platepars/$username/.config ~/platepars/$username
+python -m Utils.SkyFit2 -c ~/platepars/$username/.config ~/platepars/$username  -m ~/platepars/$username
 #Once user has finished put platepar back in ~/source/RMS and also in latest directory 
 echo Copying plateplars back to /home/$username/source/RMS/
 scp ~/platepars/$username/platepar_cmn2010.cal $1:/home/$username/source/RMS/ &
