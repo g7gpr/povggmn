@@ -71,6 +71,7 @@ scp $1:$fourhouragofile ~/platepars/$username/
 echo 75%
 scp $1:$firsthourfile ~/platepars/$username/
 echo 100%
+scp $1:"~/source/RMS/mask.bmp" ~/platepars/$username/
 
 #now get some files for context. This can be done in the background as not required for platepar development
 echo Copying other files
