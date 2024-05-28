@@ -25,9 +25,11 @@ wget https://gist.githubusercontent.com/edharman/96ebcd7809c3f4b85e72781145d03e0
 chmod +x *.sh
 
 #install pip
-sudo apt-get install pip -y
+sudo apt-get install pip virtualenv -y
+
 #install curl - this is needed by istrastream but does not always get installed
 sudo apt-get install curl -y
+
 
 sudo apt-get install sshpass -y
 
