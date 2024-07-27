@@ -93,7 +93,7 @@ latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run 
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
 /home/gmn/scripts/povggmn/gmnsshrsync.sh 
-python -m Utils.TrackStack $latestdirectory --constellations
+#python -m Utils.TrackStack $latestdirectory --constellations
 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 cp $latestdirectory/*_track* /home/gmn/outbox
@@ -133,7 +133,7 @@ mv /home/gmn/states/readyforshutdown/$(whoami) /home/gmn/states/runningfinalrout
 logger -s -t GMN $(whoami) removed from ready for shutdown
 source ~/vRMS/bin/activate
 cd ~/source/RMS
-/home/gmn/scripts/povggmn/gmnmultitrack.sh
+#/home/gmn/scripts/povggmn/gmnmultitrack.sh
 logger -s -t GMN Cleared ready for shutdown directory
 logger -s -t Wait 600 seconds so mails get sent
 mv /home/gmn/states/runningfinalroutinesstation/$(whoami) /home/gmn/states/shutdowncalls
