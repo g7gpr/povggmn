@@ -10,7 +10,7 @@ do
   cp $platepar_path /home/$username/platepars/$(basename $camera)/
 done
 
-cd source/RMS
+cd ~/source/RMS/
 
 mkdir -p /home/$username/RMS_data/SkyMap/$(hostname)
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
