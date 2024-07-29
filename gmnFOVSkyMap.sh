@@ -3,7 +3,7 @@
 #get username for paths
 username=$(whoami)
 target_dir=/home/$username/RMS_data/SkyMaps
-mkdir -p $target_dir/$(hostname)
+
 #copy masks and platepar for all cameras
 
 for camera in /home/gmn/cameras/*
@@ -17,6 +17,7 @@ do
   mkdir -p $target_dir/$stationID/
   echo Copying
   echo $platepar_path and $mask_path to $target_dir/$stationID
+  mkdir -p $target_dir/$(hostname)/$stationID
   cp $platepar_path $target_dir/$(hostname)/$stationID/
   cp $mask_path     $target_dir/$(hostname)/$stationID/
 done
