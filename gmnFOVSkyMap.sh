@@ -7,7 +7,7 @@ target_dir=/home/$username/RMS_data/SkyMaps
 
 for camera in /home/gmn/cameras/*
 do
-  stationID = $(basename $camera)
+  stationID=$(basename $camera)
   platepar_path="/home/$stationID/source/RMS/platepar_cmn2010.cal"
   mask_path="/home/$stationID/source/RMS/mask.bmp"
   mkdir -p /home/$username/platepars/$stationID/
