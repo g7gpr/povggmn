@@ -9,5 +9,5 @@ do
 done
 
 cd source/RMS
-
+pwd
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
