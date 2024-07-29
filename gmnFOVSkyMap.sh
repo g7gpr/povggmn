@@ -3,7 +3,7 @@
 #get username for paths
 username=$(whoami)
 target_dir=/home/$username/RMS_data/SkyMaps
-mkdir -p $target_dir
+mkdir -p $target_dir/$(hostname)
 #copy masks and platepar for all cameras
 
 for camera in /home/gmn/cameras/*
@@ -17,8 +17,8 @@ do
   mkdir -p $target_dir/$stationID/
   echo Copying
   echo $platepar_path and $mask_path to $target_dir/$stationID
-  cp $platepar_path $target_dir/$stationID/
-  cp $mask_path     $target_dir/$stationID/
+  cp $platepar_path $target_dir/$(hostname)/$stationID/
+  cp $mask_path     $target_dir/$(hostname)/$stationID/
 done
 
 cd ~/source/RMS/
@@ -26,6 +26,6 @@ cd ~/source/RMS/
 
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
 
-mv /home/$username/platepars/fov_sky_map.png $target_dir/$(hostname.png)
+mv /home/$username/platepars/fov_sky_map.png $target_dir/$(hostname).png
 echo Saved at
 echo $target_dir
