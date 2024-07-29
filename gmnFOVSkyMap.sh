@@ -14,5 +14,7 @@ cd source/RMS
 
 mkdir -p /home/$username/RMS_data/SkyMap/$(hostname)
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
-mv /home/$username/platepars/fov_sky_map.png /home/$username/RMS_data/SkyMap/$(hostname)/SkyMap
-echo "File at /home/$username/RMS_data/SkyMap/"
+target_dir=/home/$username/RMS_data/SkyMap/$(hostname)/SkyMap
+mv /home/$username/platepars/fov_sky_map.png $target_dir
+echo Saved at
+echo $target_dir
