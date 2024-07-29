@@ -8,6 +8,6 @@ do
   cp $platepar_path /home/gmn/platepars/$(basename $camera)/
 done
 
-cd ~/source/RMS
+cd source/RMS
 
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
