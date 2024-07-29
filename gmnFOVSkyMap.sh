@@ -12,9 +12,9 @@ done
 
 cd ~/source/RMS/
 
-mkdir -p /home/$username/RMS_data/SkyMap/$(hostname)
+mkdir -p /home/$username/RMS_data/SkyMaps/$(hostname)
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
-target_dir=/home/$username/RMS_data/SkyMap/$(hostname)
+target_dir=/home/$username/RMS_data/SkyMaps/$(hostname)
 mv /home/$username/platepars/fov_sky_map.png $target_dir
 echo Saved at
 echo $target_dir
