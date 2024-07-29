@@ -21,7 +21,7 @@ do
 done
 
 cd ~/source/RMS/
-
+source ~/vRMS/bin/activate
 
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
 
