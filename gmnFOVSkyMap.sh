@@ -1,5 +1,7 @@
 #!/bin/bash
 
+username=$(whoami)
+echo $username
 for camera in /home/gmn/cameras/*
 do
   echo Copying $(basename $camera)
@@ -10,4 +12,6 @@ done
 
 cd source/RMS
 pwd
+mkdir -p /home/gmn/RMS_data/SkyMap
 python -m Utils.FOVSkyMap -n /home/gmn/platepars/
+mv /home/gmn/platepars/fov_sky_map.png /home/gmnplatepars
