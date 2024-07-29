@@ -15,6 +15,8 @@ do
   cp $platepar_path /home/$username/platepars/$stationID/
   cp $mask_path     /home/$username/platepars/$stationID/
   mkdir -p $target_dir/$stationID/
+  echo Copying
+  echo $platepar_path and $mask_path to $target_dir/$stationID
   cp $platepar_path $target_dir/$stationID/
   cp $mask_path     $target_dir/$stationID/
 done
