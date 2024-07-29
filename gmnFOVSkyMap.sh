@@ -2,12 +2,18 @@
 
 #get username for paths
 username=$(whoami)
+
+#copy masks and platepar for all cameras
+
 for camera in /home/gmn/cameras/*
 do
 
   platepar_path="/home/$(basename $camera)/source/RMS/platepar_cmn2010.cal"
+  mask_path= "/home/$(basename $camera)/source/RMS/mask.bmp"
   mkdir -p /home/$username/platepars/$(basename $camera)/
   cp $platepar_path /home/$username/platepars/$(basename $camera)/
+  cp $mask_path     /home/$username/platepars/$(basename $camera)/
+
 done
 
 cd ~/source/RMS/
