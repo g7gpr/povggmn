@@ -31,6 +31,20 @@ populate_source_directory() {
 
 }
 
+update_sources() {
+
+  for d in */; do
+    cd $d
+    echo Pulling $d
+    if (($d == RMS))
+        echo Not pulling RMS
+      else
+        git pull
+      fi
+    cd ..
+  done
+
+}
 
 
 create_source_directory() {
@@ -40,9 +54,8 @@ create_source_directory() {
 	echo Created source directory
 	sleep 5
   populate_source_directory
+
 }
-
-
 
 create_venv() {
 
@@ -147,7 +160,6 @@ install_openCV()  {
         -D WITH_GSTREAMER=ON \
         -D BUILD_EXAMPLES=ON ..
   sudo make -j$(nproc)
-
   deactivate
   echo Installed OpencV
   sleep 5
@@ -158,7 +170,6 @@ install_RMS() {
 
   cd ~/source
   cd RMS
-
   python setup.py install
   cd RMS
 
@@ -176,7 +187,11 @@ install_CMNbinViewer() {
 rm_source
 rm_venv
 perform_apt_gets
-create_source_directory
+if test -d ~/source/; then
+    update_sources
+  else
+    create_source_directory
+  fi
 #install_python
 #create_venv
 #install_ffmpeg
