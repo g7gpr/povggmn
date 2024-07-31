@@ -27,7 +27,7 @@ populate_source_directory() {
   git clone https://github.com/python/cpython
 	git clone https://github.com/FFmpeg/FFmpeg
   git clone https://github.com/g7gpr/RMS
-  git clone https://github.com/opencv/opencv.git
+  git clone --recursive https://github.com/opencv/opencv-python.git
 
 }
 
@@ -150,13 +150,13 @@ install_ffmpeg() {
 install_openCV()  {
 
   echo Installing opencv
-	cd ~/source/opencv
+	cd ~/source/opencv-python
 	git pull
 	source ~/vRMS/bin/activate
-	git checkout 4.6.0
+
   mkdir -p build
   cd build
-  cmake -D CMAKE_BUILD_TYPE=RELEASE \
+  cmake .. -D CMAKE_BUILD_TYPE=RELEASE \
         -D INSTALL_PYTHON_EXAMPLES=ON \
         -D INSTALL_C_EXAMPLES=OFF \
         -D PYTHON_EXECUTABLE=$(which python3) \
@@ -168,6 +168,8 @@ install_openCV()  {
         -D WITH_GSTREAMER=ON \
         -D BUILD_EXAMPLES=ON ..
   sudo make -j$(nproc)
+  cd ..
+  pip wheel . --verbose
   deactivate
   echo Installed OpencV
   sleep 5
