@@ -184,8 +184,8 @@ install_CMNbinViewer() {
 
 
 
-rm_source
-rm_venv
+#rm_source
+#rm_venv
 perform_apt_gets
 if test -d ~/source/; then
     update_sources
