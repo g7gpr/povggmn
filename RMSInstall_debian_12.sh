@@ -23,7 +23,7 @@ create_venv() {
 perform_apt_gets() {
 	sudo apt-get update
 	sudo apt-get install -y git mplayer python3 python3-dev python3-pip libblas-dev libatlas-base-dev
-  sudo apt-get install -y liblapack-dev at-spi2-core libopencv-dev libffi-dev libssl-dev socat ntp \
+  sudo apt-get install -y liblapack-dev at-spi2-core libopencv-dev libffi-dev libssl-dev socat ntp
   sudo apt-get install -y libxml2-dev libxslt-dev imagemagick ffmpeg cmake unzip
 	sudo apt-get -y install autoconf automake build-essential cmake 
 	sudo apt-get -y install git-core 
