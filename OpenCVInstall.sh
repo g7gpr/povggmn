@@ -1,11 +1,27 @@
-create_source_directory() {
+rm_source() {
+  cd ~
+  sudo rm -rf ~/source
+}
 
+rm_venv() {
+  cd ~
+  rm -rf vRMS
+}
+
+
+create_source_directory() {
 	mkdir -p ~/source
 }
 
-perform_apt_gets() {
+create_venv() {
+  virtualenv vRMS
+  source ~/vRMS/bin/activate
+  pip install -r /home/gmn/scripts/povggmn/requirements.txt
 
-	sudo apt-get update 
+}
+
+perform_apt_gets() {
+	sudo apt-get update
 	sudo apt-get -y install autoconf automake build-essential cmake 
 	sudo apt-get -y install git-core 
 	sudo apt-get -y install libass-dev libfreetype6-dev libgnutls28-dev libmp3lame-dev libsdl2-dev libtool 
@@ -19,10 +35,10 @@ perform_apt_gets() {
 	sudo apt install -y gstreamer1.0-python3-plugin-loader
 	sudo apt install -y ubuntu-restricted-extras
 	sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+  sudo apt install -y gstreamer1.0-plugins-good python3-pyqt5
 }
 
 install_ffmpeg() {
-
 	cd ~/source
 	rm ffmpeg-5.0.tar.bz2
 	wget -O ffmpeg-5.0.tar.bz2 "https://www.ffmpeg.org/releases/ffmpeg-5.0.1.tar.bz2"
@@ -35,7 +51,6 @@ install_ffmpeg() {
 }
 
 install_openCV()  {
-
 	cd ~/source
 	rm opencv.zip
 	wget -O opencv.zip https://github.com/opencv/opencv/archive/4.x.zip
@@ -47,8 +62,23 @@ install_openCV()  {
 	sudo make install
 }
 
+install_RMS() {
+  cd ~/source
+  git clone https://ghithub.com/g7gpr/RMS
+  cd RMS
+  python setup.py install
+ }
+
+install_CMNbinViewer() {
+  cd ~/source/
+  git clone https://github.com/CroatianMeteorNetwork/cmn_binviewer.git
+}
+
+rm_source
+rm_venv
 create_source_directory
+create_venv
 perform_apt_gets
 install_ffmpeg
 install_openCV
- 
+install_RMS
