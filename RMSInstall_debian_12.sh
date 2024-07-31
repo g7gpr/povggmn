@@ -79,7 +79,7 @@ install_openCV()  {
 	source ~/vRMS/bin/activate
   git clone https://github.com/opencv/opencv.git
   cd opencv/
-  git checkout 4.1.0
+  git checkout 4.7.0
   mkdir build
   cd build
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
