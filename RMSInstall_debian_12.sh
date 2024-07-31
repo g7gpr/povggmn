@@ -7,7 +7,7 @@ rm_source() {
   cd ~
   sudo rm -rf ~/source
   echo Removed source directory
-  sleep 5
+  sleep 1
 
 }
 
@@ -17,7 +17,7 @@ rm_venv() {
   cd ~
   rm -rf vRMS
   echo Removed venv
-  sleep 5
+  sleep 1
 
 }
 
@@ -75,7 +75,7 @@ create_venv() {
   pip install pyfits
   pip install PyQt5
   echo Created venv
-  sleep 5
+  sleep 1
 
 }
 
@@ -85,7 +85,7 @@ perform_apt_gets() {
 	sudo apt-get update
 	sudo apt-get install -y git mplayer libblas-dev libatlas-base-dev
   sudo apt-get install -y liblapack-dev at-spi2-core libopencv-dev libffi-dev libssl-dev socat ntp
-  sudo apt-get install -y libxml2-dev libxslt-dev imagemagick ffmpeg cmake unzip
+  sudo apt-get install -y libxml2-dev libxslt-dev imagemagick cmake unzip
 	sudo apt-get install -y autoconf automake build-essential cmake
 	sudo apt-get install -y git-core
 	sudo apt-get install -y libass-dev libfreetype6-dev libgnutls28-dev libmp3lame-dev libsdl2-dev libtool
@@ -103,7 +103,7 @@ perform_apt_gets() {
   sudo apt-get install -y virtualenv
   sudo apt-get install -y libsqlite3-dev
   echo Got packages
-  sleep 5
+  sleep 1
 
 }
 
@@ -135,7 +135,7 @@ install_ffmpeg() {
 	sudo ldconfig -v
 	deactivate
 	echo Installed ffmpeg
-	sleep 5
+	sleep 1
 
 }
 
@@ -192,8 +192,8 @@ if test -d ~/source/; then
   else
     create_source_directory
   fi
-#install_python
-#create_venv
-#install_ffmpeg
-#install_openCV
-#install_RMS
+install_python
+create_venv
+install_ffmpeg
+install_openCV
+install_RMS
