@@ -74,11 +74,20 @@ install_CMNbinViewer() {
   git clone https://github.com/CroatianMeteorNetwork/cmn_binviewer.git
 }
 
+
+echo "Removing source directory"
 rm_source
+sleep 3
+echo "Removing venv"
 rm_venv
-create_source_directory
-create_venv
+echo "Get Packages"
 perform_apt_gets
+create_source_directory
+sleep 3
+echo "Creating venv"
+create_venv
+sleep 3
+
 install_ffmpeg
 install_openCV
 install_RMS
