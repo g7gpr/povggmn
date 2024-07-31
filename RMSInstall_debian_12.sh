@@ -59,6 +59,7 @@ perform_apt_gets() {
 install_ffmpeg() {
   echo Installing ffmpeg
 	cd ~/source
+	source ~/vRMS/bin/activate
 	rm ffmpeg-5.0.tar.bz2
 	wget -O ffmpeg-5.0.tar.bz2 "https://www.ffmpeg.org/releases/ffmpeg-5.0.1.tar.bz2"
 	tar xf ffmpeg-5.0.tar.bz2
@@ -67,6 +68,7 @@ install_ffmpeg() {
 	sudo make -j4
 	sudo make install
 	sudo ldconfig -v
+	deactivate
 	echo Installed ffmpeg
 	sleep 5
 }
@@ -74,6 +76,7 @@ install_ffmpeg() {
 install_openCV()  {
   echo Installing opencv
 	cd ~/source
+	source ~/vRMS/bin/activate
   git clone https://github.com/opencv/opencv.git
   cd opencv/
   git checkout 4.1.0
@@ -91,6 +94,8 @@ install_openCV()  {
         -D WITH_GSTREAMER=ON \
         -D BUILD_EXAMPLES=ON ..
   sudo make -j$(nproc)
+
+  deactivate
   echo Installed OpencV
   sleep 5
 }
@@ -109,11 +114,11 @@ install_CMNbinViewer() {
 
 
 
-#rm_source
-#rm_venv
-#perform_apt_gets
-#create_source_directory
-#create_venv
-#install_ffmpeg
+rm_source
+rm_venv
+perform_apt_gets
+create_source_directory
+create_venv
+install_ffmpeg
 install_openCV
 install_RMS
