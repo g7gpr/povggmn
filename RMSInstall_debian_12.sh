@@ -195,16 +195,17 @@ install_CMNbinViewer() {
 
 
 #rm_source
-rm_venv
 
-perform_apt_gets
-if test -d ~/source/; then
-    echo source directory exists
-  else
-    create_source_directory
-  fi
-install_python
-create_venv
-install_ffmpeg
+#rm_venv
+
+#perform_apt_gets
+#if test -d ~/source/; then
+#    echo source directory exists
+#  else
+#    create_source_directory
+#  fi
+#install_python
+#create_venv
+#install_ffmpeg
 install_openCV
 install_RMS
