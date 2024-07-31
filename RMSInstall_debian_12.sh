@@ -152,6 +152,7 @@ install_openCV()  {
 	cd ~/source/opencv
 	git pull
 	source ~/vRMS/bin/activate
+	git checkout 4.6.0
   mkdir -p build
   cd build
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -191,7 +192,7 @@ install_CMNbinViewer() {
 
 
 #rm_source
-#rm_venv
+rm_venv
 perform_apt_gets
 if test -d ~/source/; then
     echo source directory exists
@@ -199,7 +200,7 @@ if test -d ~/source/; then
     create_source_directory
   fi
 install_python
-#create_venv
-#install_ffmpeg
-#install_openCV
-#install_RMS
+create_venv
+install_ffmpeg
+install_openCV
+install_RMS
