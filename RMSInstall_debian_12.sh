@@ -36,7 +36,7 @@ update_sources() {
   for d in */; do
     cd $d
     echo Pulling $d
-    if (($d == RMS))
+    if (($d == RMS)); then
         echo Not pulling RMS
       else
         git pull
