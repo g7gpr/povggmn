@@ -1,28 +1,38 @@
 rm_source() {
+  echo Removing source directory
   cd ~
   sudo rm -rf ~/source
+  echo Removed source directory
+  sleep 5
 }
 
 rm_venv() {
+  echo Removing venv
   cd ~
   rm -rf vRMS
+  echo Removed venv
+  sleep 5
 }
 
 
 create_source_directory() {
+  echo Creating source directory
 	mkdir -p ~/source
+	echo Created source directory
+	sleep 5
 }
 
 create_venv() {
-  cd ~
-  rm -rf vRMS
+  echo Creating venv
   virtualenv vRMS
   source ~/vRMS/bin/activate
   pip install -r /home/gmn/scripts/povggmn/requirements.txt
-
+  echo Created venv
+  sleep 5
 }
 
 perform_apt_gets() {
+  echo Getting packages
 	sudo apt-get update
 	sudo apt-get install -y git mplayer python3 python3-dev python3-pip libblas-dev libatlas-base-dev
   sudo apt-get install -y liblapack-dev at-spi2-core libopencv-dev libffi-dev libssl-dev socat ntp
@@ -42,9 +52,12 @@ perform_apt_gets() {
 	sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
   sudo apt install -y gstreamer1.0-plugins-good python3-pyqt5
   sudo apt-get -y install virtualenv
+  echo Got packages
+  sleep 5
 }
 
 install_ffmpeg() {
+  echo Installing ffmpeg
 	cd ~/source
 	rm ffmpeg-5.0.tar.bz2
 	wget -O ffmpeg-5.0.tar.bz2 "https://www.ffmpeg.org/releases/ffmpeg-5.0.1.tar.bz2"
@@ -54,18 +67,32 @@ install_ffmpeg() {
 	sudo make -j4
 	sudo make install
 	sudo ldconfig -v
+	echo Installed ffmpeg
+	sleep 5
 }
 
 install_openCV()  {
+  echo Installing opencv
 	cd ~/source
-	rm opencv.zip
-	wget -O opencv.zip https://github.com/opencv/opencv/archive/4.x.zip
-	unzip -qq opencv.zip
-	mkdir -p build
-	cd build
-	cmake ../opencv-4.x	
-	cmake --build .  --config Release -j4
-	sudo make install
+  git clone https://github.com/opencv/opencv.git
+  cd opencv/
+  git checkout 4.1.0
+  mkdir build
+  cd build
+  cmake -D CMAKE_BUILD_TYPE=RELEASE \
+        -D INSTALL_PYTHON_EXAMPLES=ON \
+        -D INSTALL_C_EXAMPLES=OFF \
+        -D PYTHON_EXECUTABLE=$(which python3) \
+        -D BUILD_opencv_python2=OFF \
+        -D CMAKE_INSTALL_PREFIX=$(python3 -c “import sys; print(sys.prefix)”) \
+        -D PYTHON3_EXECUTABLE=$(which python3) \
+        -D PYTHON3_INCLUDE_DIR=$(python3 -c “from distutils.sysconfig import get_python_inc; print(get_python_inc())”) \
+        -D PYTHON3_PACKAGES_PATH=$(python3 -c “from distutils.sysconfig import get_python_lib; print(get_python_lib())”) \
+        -D WITH_GSTREAMER=ON \
+        -D BUILD_EXAMPLES=ON ..
+  sudo make -j$(nproc)
+  echo Installed OpencV
+  sleep 5
 }
 
 install_RMS() {
@@ -81,19 +108,12 @@ install_CMNbinViewer() {
 }
 
 
-echo "Removing source directory"
-rm_source
-sleep 3
-echo "Removing venv"
-rm_venv
-echo "Get Packages"
-perform_apt_gets
-create_source_directory
-sleep 3
-echo "Creating venv"
-create_venv
-sleep 3
 
-install_ffmpeg
+#rm_source
+#rm_venv
+#perform_apt_gets
+#create_source_directory
+#create_venv
+#install_ffmpeg
 install_openCV
 install_RMS
