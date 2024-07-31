@@ -180,9 +180,10 @@ install_openCV()  {
 install_RMS() {
 
   cd ~/source
+  source ~/vRMS/bin/activate
   cd RMS
   python setup.py install
-  cd RMS
+  deactivate
 
  }
 
