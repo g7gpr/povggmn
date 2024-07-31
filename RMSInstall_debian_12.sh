@@ -74,7 +74,7 @@ install_python() {
 
   cd ~/source
   source ~/vRMS/bin/activate
-  wget -o https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
+  wget -O https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
   tar xf Python-3.12.4
   cd Python-3.12.4
   ./configure --prefix=/opt/python/3.12.4/ --enable-optimizations --with-lto --with-computed-gotos --with-system-ffi
