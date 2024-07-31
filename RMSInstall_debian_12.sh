@@ -45,6 +45,7 @@ create_source_directory() {
 create_venv() {
 
   echo Creating venv
+  cd ~
   virtualenv vRMS
   source ~/vRMS/bin/activate
   pip install -U pip setuptools
@@ -193,6 +194,7 @@ install_CMNbinViewer() {
 
 #rm_source
 rm_venv
+
 perform_apt_gets
 if test -d ~/source/; then
     echo source directory exists
