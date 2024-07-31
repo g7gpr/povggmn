@@ -24,9 +24,20 @@ create_source_directory() {
 
 create_venv() {
   echo Creating venv
-  virtualenv vRMS
+  #virtualenv vRMS
   source ~/vRMS/bin/activate
-  pip install -r /home/gmn/scripts/povggmn/requirements.txt
+  pip install -U pip setuptools
+  pip install numpy
+  pip install Pillow
+  pip install gitpython cython pyephem astropy
+  pip install scipy==1.8.1
+  pip install paramiko==2.8.0
+  pip install matplotlib
+  pip install imreg_dft
+  pip install configparser==4.0.2
+  pip install imageio==2.6.1
+  pip install pyfits
+  pip install PyQt5
   echo Created venv
   sleep 5
 }
@@ -55,6 +66,22 @@ perform_apt_gets() {
   echo Got packages
   sleep 5
 }
+
+
+
+install_python() {
+
+  cd ~/source
+  source ~/vRMS/bin/activate
+  wget -o https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
+  tar xf Python-3.12.4
+  cd Python-3.12.4
+  ./configure --prefix=/opt/python/3.12.4/ --enable-optimizations --with-lto --with-computed-gotos --with-system-ffi
+  make -j"$(nproc)"
+  make altinstall
+
+}
+
 
 install_ffmpeg() {
   echo Installing ffmpeg
@@ -102,9 +129,10 @@ install_openCV()  {
 
 install_RMS() {
   cd ~/source
-  git clone https://ghithub.com/g7gpr/RMS
-  cd RMS
+  git clone https://github.com/g7gpr/RMS
   python setup.py install
+  cd RMS
+
  }
 
 install_CMNbinViewer() {
@@ -114,11 +142,11 @@ install_CMNbinViewer() {
 
 
 
-rm_source
-rm_venv
+#rm_source
+#rm_venv
 perform_apt_gets
-create_source_directory
+#create_source_directory
 create_venv
-install_ffmpeg
-install_openCV
+#install_ffmpeg
+#install_openCV
 install_RMS
