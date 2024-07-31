@@ -15,7 +15,7 @@ create_source_directory() {
 
 create_venv() {
   cd ~
-  sudo apt-get install virtualenv
+  rm -rf vRMS
   virtualenv vRMS
   source ~/vRMS/bin/activate
   pip install -r /home/gmn/scripts/povggmn/requirements.txt
@@ -41,13 +41,14 @@ perform_apt_gets() {
 	sudo apt install -y ubuntu-restricted-extras
 	sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
   sudo apt install -y gstreamer1.0-plugins-good python3-pyqt5
+  sudo apt-get -y install virtualenv
 }
 
 install_ffmpeg() {
 	cd ~/source
 	rm ffmpeg-5.0.tar.bz2
 	wget -O ffmpeg-5.0.tar.bz2 "https://www.ffmpeg.org/releases/ffmpeg-5.0.1.tar.bz2"
-	tar -xvf ffmpeg-5.0.tar.bz2
+	tar xf ffmpeg-5.0.tar.bz2
 	cd ffmpeg-5.0.1
 	./configure  --enable-shared --enable-gpl --enable-libx264 --enable-libx265 --enable-libvpx --enable-zlib
 	sudo make -j4
@@ -59,7 +60,7 @@ install_openCV()  {
 	cd ~/source
 	rm opencv.zip
 	wget -O opencv.zip https://github.com/opencv/opencv/archive/4.x.zip
-	unzip opencv.zip
+	unzip -qq opencv.zip
 	mkdir -p build
 	cd build
 	cmake ../opencv-4.x	
