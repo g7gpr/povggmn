@@ -24,7 +24,7 @@ create_source_directory() {
 
 create_venv() {
   echo Creating venv
-  #virtualenv vRMS
+  virtualenv vRMS
   source ~/vRMS/bin/activate
   pip install -U pip setuptools
   pip install numpy
@@ -45,7 +45,7 @@ create_venv() {
 perform_apt_gets() {
   echo Getting packages
 	sudo apt-get update
-	sudo apt-get install -y git mplayer python3 python3-dev python3-pip libblas-dev libatlas-base-dev
+	sudo apt-get install -y git mplayer libblas-dev libatlas-base-dev
   sudo apt-get install -y liblapack-dev at-spi2-core libopencv-dev libffi-dev libssl-dev socat ntp
   sudo apt-get install -y libxml2-dev libxslt-dev imagemagick ffmpeg cmake unzip
 	sudo apt-get -y install autoconf automake build-essential cmake 
@@ -63,6 +63,7 @@ perform_apt_gets() {
 	sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
   sudo apt install -y gstreamer1.0-plugins-good python3-pyqt5
   sudo apt-get -y install virtualenv
+  sudo apt-get -y install libsqlite3-dev
   echo Got packages
   sleep 5
 }
@@ -142,11 +143,12 @@ install_CMNbinViewer() {
 
 
 
-#rm_source
-#rm_venv
+rm_source
+rm_venv
 perform_apt_gets
-#create_source_directory
+create_source_directory
+install_python
 create_venv
-#install_ffmpeg
-#install_openCV
+install_ffmpeg
+install_openCV
 install_RMS
