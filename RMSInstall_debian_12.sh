@@ -106,6 +106,7 @@ perform_apt_gets() {
   sudo apt-get install -y libsqlite3-dev
   sudo apt-get install -y libssl-dev
   sudo apt-get install -y zlib1g-dev
+  sudo apt-get install -y tk-dev
   echo Got packages
   sleep 1
 
@@ -121,7 +122,7 @@ install_python() {
   cd build
   ../configure --with-pydebug --enable-optimizations --with-lto --with-computed-gotos
   make -j"$(nproc)"
-  make altinstall
+  sudo make altinstall
   cd ~/source
 
 }
