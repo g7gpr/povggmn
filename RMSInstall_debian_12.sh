@@ -15,7 +15,7 @@ create_source_directory() {
 
 create_venv() {
   cd ~
-  sudo pip3 install virtualenv
+  sudo apt-get install virtualenv
   virtualenv vRMS
   source ~/vRMS/bin/activate
   pip install -r /home/gmn/scripts/povggmn/requirements.txt
