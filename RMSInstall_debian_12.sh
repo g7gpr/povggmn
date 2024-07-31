@@ -197,7 +197,7 @@ if test -d ~/source/; then
   else
     create_source_directory
   fi
-#install_python
+install_python
 #create_venv
 #install_ffmpeg
 #install_openCV
