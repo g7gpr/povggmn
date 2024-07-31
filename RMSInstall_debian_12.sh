@@ -60,6 +60,7 @@ create_venv() {
   pip install imageio==2.6.1
   pip install pyfits
   pip install PyQt5
+  pip install dvrip
   echo Created venv
   sleep 1
 
@@ -69,7 +70,7 @@ perform_apt_gets() {
 
   echo Getting packages
 	sudo apt-get update
-	sudo apt-get build-dep python3
+	sudo apt-get build-dep python3 screen
   sudo apt-get install -y pkg-config
   sudo apt-get install -y build-essential gdb lcov pkg-config
   sudo apt-get install -y libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev
@@ -171,7 +172,7 @@ install_openCV()  {
   cd ..
   pip wheel . --verbose
   deactivate
-  echo Installed OpencV
+  echo Built opencv-python, however will require manual install
   sleep 5
 
 }
@@ -195,17 +196,15 @@ install_CMNbinViewer() {
 
 
 #rm_source
-
-#rm_venv
-
-#perform_apt_gets
-#if test -d ~/source/; then
-#    echo source directory exists
-#  else
-#    create_source_directory
-#  fi
-#install_python
-#create_venv
-#install_ffmpeg
+rm_venv
+perform_apt_gets
+if test -d ~/source/; then
+    echo source directory exists
+  else
+    create_source_directory
+  fi
+install_python
+create_venv
+install_ffmpeg
 install_openCV
 install_RMS
