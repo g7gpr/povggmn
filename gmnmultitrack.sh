@@ -32,3 +32,4 @@ mkdir -p ~/sendtoweb
 $commandstring
 
 rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(hostname)/
+echo $commandstring
