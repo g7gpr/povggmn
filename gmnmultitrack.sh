@@ -27,7 +27,7 @@ echo $captured
 done
 cd ~/source/RMS
 
-commandstring='python -m Utils.TrackStack.py '$commandstring' --constellations  -c . -f6 -o /home/gmn/sendtoweb '$1
+commandstring='python -m Utils.TrackStack '$commandstring' --constellations  -c . -f6 -o /home/gmn/sendtoweb '$1
 echo $commandstring
 mkdir -p ~/sendtoweb
 $commandstring
