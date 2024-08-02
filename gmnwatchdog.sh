@@ -96,7 +96,7 @@ logger -s -t $(whoami) Starting trackstack in $latestdirectory
 python -m Utils.TrackStack $latestdirectory --constellations
 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
-cp $latestdirectory/*_track* /home/gmn/outbox
+rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(hostname)/$(whoami)/
 backuptime=`date +%Y%m%d%H%M%S`
 cd backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
 echo Sending command

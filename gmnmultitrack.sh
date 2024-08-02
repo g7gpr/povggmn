@@ -26,6 +26,7 @@ echo $captured
 #commandstring=$commandstring'   '$captured
 done
 cd ~/source/RMS
-commandstring='python Utils/TrackStack.py '$commandstring' --constellations  -c . -f6 -o /home/gmn/outbox '$1
+commandstring='python Utils/TrackStack.py '$commandstring' --constellations  -c . -f6 -o /home/gmn/sendtoweb '$1
 echo $commandstring
+rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(hostname)/
 $commandstring
