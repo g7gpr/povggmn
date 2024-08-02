@@ -98,7 +98,7 @@ scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(who
 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(hostname)/$(whoami)/
 backuptime=`date +%Y%m%d%H%M%S`
-cd backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest; exit"
+backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest; exit"
 echo Sending command
 echo $backupcommand
 ssh gmndata@192.168.1.230 $backupcommand
