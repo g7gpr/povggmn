@@ -96,10 +96,17 @@ echo Saving to /home/gmndata/trackstacks/$track_stack_date/
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
 /home/gmn/scripts/povggmn/gmnsshrsync.sh 
 python -m Utils.TrackStack $latestdirectory --constellations
+mkdir -p ~/combined
+cp $latest_directory/*_track_stack.jpg ~/combined/$(hostname).jpg
+rsync -avzh --relative ~/./combined/*.jpg gmndata@192.168.1.230:trackstacks/$track_stack_date/
+
+
 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 
-rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/
+
+
+
 backuptime=`date +%Y%m%d%H%M%S`
 backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/backups/$(whoami)/latest; exit"
 echo Sending command
