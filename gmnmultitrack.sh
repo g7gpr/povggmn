@@ -8,6 +8,7 @@ do
 thiscamera=`echo $thiscamerapath | cut -d'/' -f5-`
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n1 | head -n1`
 echo $captured
+track_stack_date=$(echo $captured | cut -d_ -f3)
 commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n2 | head -n1`
 echo $captured
@@ -27,7 +28,7 @@ echo $captured
 done
 cd ~/source/RMS
 
-track_stack_date=$(echo $captured | cut -d_ -f3)
+
 echo saving to /home/gmndata/trackstacks/combined/$track_stack_date/
 commandstring='python -m Utils.TrackStack '$commandstring' --constellations  -c . -f6 -o /home/gmn/sendtoweb '$1
 echo $commandstring
