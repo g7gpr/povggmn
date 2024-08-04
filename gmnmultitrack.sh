@@ -36,8 +36,8 @@ mkdir -p ~/sendtoweb
 $commandstring
 
 mkdir -p ~/combined
-cp $latest_directory/*_track_stack.jpg ~/combined/$(hostname).jpg
+cp $~/combined/*.jpg ~/combined/$(hostname).jpg
 rsync -avzh --relative ~/./combined/*.jpg gmndata@192.168.1.230:trackstacks/$track_stack_date/
+rm -f ~/combined/$(hostname).jpg
 
-rm -f /home/gmn/sendtoweb/*.jpg
 echo $commandstring
