@@ -35,5 +35,5 @@ echo $commandstring
 mkdir -p ~/sendtoweb
 $commandstring
 
-rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/combined
+rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/combined/
 echo $commandstring
