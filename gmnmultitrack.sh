@@ -31,6 +31,6 @@ commandstring='python -m Utils.TrackStack '$commandstring' --constellations  -c 
 echo $commandstring
 mkdir -p ~/sendtoweb
 $commandstring
-
-rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(hostname)/
+track_stack_date=$(echo $captured | cut -d_ -f3)
+rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(track_stack_date)/
 echo $commandstring
