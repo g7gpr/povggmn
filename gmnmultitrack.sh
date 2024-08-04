@@ -29,11 +29,11 @@ done
 cd ~/source/RMS
 
 
-echo saving to /home/gmndata/trackstacks/$track_stack_date/combined/_$(hostname)
+echo saving to /home/gmndata/trackstacks/$track_stack_date/combined/_$(hostname).jpg
 commandstring='python -m Utils.TrackStack '$commandstring' --constellations  -c . -f6 -o /home/gmn/sendtoweb '$1
 echo $commandstring
 mkdir -p ~/sendtoweb
 $commandstring
 
-rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/combined/_$(hostname)
+rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/combined/_$(hostname).jpg
 echo $commandstring
