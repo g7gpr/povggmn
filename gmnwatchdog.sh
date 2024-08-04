@@ -95,7 +95,7 @@ track_stack_date=$(echo $latestdirectory | cut -d_ -f3)
 echo Saving to /home/gmndata/trackstacks/$track_stack_date/
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
 /home/gmn/scripts/povggmn/gmnsshrsync.sh 
-python -m Utils.TrackStack $latestdirectory --constellations
+python -m Utils.TrackStack $latestdirectory --constellations -x
 rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/
 
 
