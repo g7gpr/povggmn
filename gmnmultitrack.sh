@@ -27,10 +27,12 @@ echo $captured
 done
 cd ~/source/RMS
 
+track_stack_date=$(echo $captured | cut -d_ -f3)
+echo saving to $/home/gmndata/trackstacks/$(track_stack_date)/
 commandstring='python -m Utils.TrackStack '$commandstring' --constellations  -c . -f6 -o /home/gmn/sendtoweb '$1
 echo $commandstring
 mkdir -p ~/sendtoweb
 $commandstring
-track_stack_date=$(echo $captured | cut -d_ -f3)
-rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(track_stack_date)/
+
+rsync /home/gmn/sendtoweb/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/
 echo $commandstring

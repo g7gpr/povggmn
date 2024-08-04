@@ -92,14 +92,14 @@ logger -s -t $(whoami) in camerasstopped
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run trackstack
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 track_stack_date=$(echo $latestdirectory | cut -d_ -f3)
-echo Saving to /home/gmndata/trackstacks/$(track_stack_date)/
+echo Saving to /home/gmndata/trackstacks/$track_stack_date/
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
 /home/gmn/scripts/povggmn/gmnsshrsync.sh 
 python -m Utils.TrackStack $latestdirectory --constellations
 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 
-rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$(track_stack_date)/
+rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/
 backuptime=`date +%Y%m%d%H%M%S`
 backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/backups/$(whoami)/latest; exit"
 echo Sending command
