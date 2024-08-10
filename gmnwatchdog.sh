@@ -91,14 +91,23 @@ username=$(whoami)
 logger -s -t $(whoami) in camerasstopped
 latestdirectory=`ls /home/$username/RMS_data/CapturedFiles | tail  -n1`				#run trackstack
 latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
+track_stack_date=$(echo $latestdirectory | cut -d_ -f3)
+echo Saving to /home/gmndata/trackstacks/$track_stack_date/
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
 /home/gmn/scripts/povggmn/gmnsshrsync.sh 
-#python -m Utils.TrackStack $latestdirectory --constellations
+python -m Utils.TrackStack $latestdirectory --constellations -x
+rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/
+
+
+
 scp $latestdirectory/*.jpg gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
 scp $latestdirectory/*.bmp gmndata@192.168.1.230:/home/gmndata/$(hostname)/$(whoami)/latest
-cp $latestdirectory/*_track* /home/gmn/outbox
+
+
+
+
 backuptime=`date +%Y%m%d%H%M%S`
-cd backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/$(whoami)/latest"
+backupcommand="mkdir -p ~/$(whoami)/backup; mv ~/$(whoami)/latest ~/$(whoami)/backup/$backuptime; mkdir -p ~/backups/$(whoami)/latest; exit"
 echo Sending command
 echo $backupcommand
 ssh gmndata@192.168.1.230 $backupcommand
@@ -133,7 +142,7 @@ mv /home/gmn/states/readyforshutdown/$(whoami) /home/gmn/states/runningfinalrout
 logger -s -t GMN $(whoami) removed from ready for shutdown
 source ~/vRMS/bin/activate
 cd ~/source/RMS
-#/home/gmn/scripts/povggmn/gmnmultitrack.sh
+/home/gmn/scripts/povggmn/gmnmultitrack.sh
 logger -s -t GMN Cleared ready for shutdown directory
 logger -s -t Wait 600 seconds so mails get sent
 mv /home/gmn/states/runningfinalroutinesstation/$(whoami) /home/gmn/states/shutdowncalls
