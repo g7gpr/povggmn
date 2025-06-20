@@ -73,7 +73,7 @@ echo Incoming is empty
 else
 echo Incoming is not empty - which is strange, why is the file still there? Is it corrupted?
 
-sftp $remote <<< "ls -la files/AU*.bz2" 1> fileinincoming
+sftp $remote <<< "ls -la files/AU*.tar" 1> fileinincoming
 
 echo File in incoming
 incomingfilesize=$(more fileinincoming |   awk '{print  $5}')
