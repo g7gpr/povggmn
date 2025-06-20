@@ -10,6 +10,7 @@ if [ $rsyncrunning -eq "0" ];
 then
 echo rsync is not running - start it
 nohup rsync -av -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --bwlimit=32  --partial-dir=partial/ ~/RMS_data/ArchivedFiles/*.bz2 $(whoami)@192.168.1.241:files/incoming  &
+nohup rsync -av -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --bwlimit=32  --partial-dir=partial/ ~/RMS_data/FramesFiles/*.tar $(whoami)@192.168.1.241:files/incoming  &
 logger -s -t rsync started
 else
 echo rsync is running - do nothing
