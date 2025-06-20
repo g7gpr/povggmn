@@ -11,7 +11,7 @@ echo Uploader already running - quit
 exit
 fi
 
-touch ~/.uploaderrunning
+touch ~/.taruploaderrunning
 
 remote='gmn.uwo.ca'
 cameraname=$(whoami | tr '[:lower:]' '[:upper:]')
