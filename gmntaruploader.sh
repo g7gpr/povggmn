@@ -63,7 +63,7 @@ fi
 
 #check to see if remote server incoming space is free
 
-filesinincoming=$(sftp $remote <<<"ls files/AU*.bz2" | grep $cameraname | wc -l)
+filesinincoming=$(sftp $remote <<<"ls files/AU*.tar" | grep $cameraname | wc -l)
 
 echo Files in incoming : $filesinincoming
 
