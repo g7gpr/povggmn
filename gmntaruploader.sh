@@ -127,7 +127,7 @@ echo Local file size is  $localfilesize
 #Get the size of the file on the remote machine
 
 echo Look for $unconfirmedfilename on $remote
-remotefilesize=$(sftp $remote <<< "ls -la files/processed/" | grep $unconfirmedfilename |   awk '{print  $5}')
+remotefilesize=$(sftp $remote <<< "ls -la files/processed/*.tar" | grep $unconfirmedfilename |   awk '{print  $5}')
 echo $unconfirmedfilename remote filesize is $remotefilesize
 
 if [ -z "$remotefilesize" ];
