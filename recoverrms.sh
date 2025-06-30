@@ -20,7 +20,7 @@ for dir in ~/RMS_data/ArchivedFiles/*/; do
 
     stationID=$(grep stationID ${dir}.config | cut -d ":" -f2)
 
-    if [[ $stationID != "XX0001" ]]; then
+    if [[ $stationID != XX0001 ]]; then
         echo $stationID
         last_archive_for_config=$dir;
     fi
