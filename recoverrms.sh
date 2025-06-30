@@ -21,7 +21,6 @@ for dir in ~/RMS_data/ArchivedFiles/*/; do
     stationID=$(grep stationID ${dir}.config | cut -d ":" -f2 | tr -cd '[:alnum:]')
 
     if [[ "$stationID" != "XX0001" ]]; then
-        echo $stationID
         last_archive_for_config=$dir;
     fi
     done
