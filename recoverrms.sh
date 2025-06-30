@@ -1,4 +1,8 @@
 #!/bin/bash
+cd ~/source
+rm -rf RMS
+rsync -ah --include ".*" /home/gmn/source/RMS .
+git checkout prerelease
 cd ~/source/RMS
 last_archive=$(stat ~/RMS_data/CapturedFiles/* | grep File: | tail -n1 | cut -d ':' -f2)
 echo Pulling files from $last_archive
