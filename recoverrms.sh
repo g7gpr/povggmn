@@ -7,11 +7,11 @@ mv .config .configTemplate
 git reset --hard
 git checkout prerelease
 for dir in ~/RMS_data/ArchivedFiles/*/; do
-    last_archive=$dir;
+
     stationID=$(grep stationID ${last_archive}.config | cut -d ":" -f2)
     echo ${stationID}
     if [[ stationID != "XX0001" ]]; then
-      break
+        last_archive=$dir;
     fi
     done
 echo Pulling files from ${last_archive}
