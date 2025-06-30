@@ -12,6 +12,7 @@ for dir in ~/RMS_data/ArchivedFiles/*/; do
     echo ${stationID}
     if [[ stationID != "XX0001" ]]; then
       break
+    fi
     done
 echo Pulling files from ${last_archive}
 cp ${last_archive}mask.bmp ${last_archive}.config ${last_archive}platepar_cmn2010.cal .
