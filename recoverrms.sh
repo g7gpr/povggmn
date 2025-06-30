@@ -10,7 +10,7 @@ for dir in ~/RMS_data/ArchivedFiles/*/; do
     last_archive=$dir;
     stationID=$(grep stationID ${last_archive}.config | cut -d ":" -f2)
     echo ${stationID}
-    if [[ stationID != "XX0001"]]; then
+    if [[ stationID != "XX0001" ]]; then
       break
     done
 echo Pulling files from ${last_archive}
