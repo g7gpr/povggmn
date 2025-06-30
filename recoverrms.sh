@@ -9,7 +9,6 @@ git checkout prerelease
 for dir in ~/RMS_data/ArchivedFiles/*/; do
 
     stationID=$(grep stationID ${last_archive}.config | cut -d ":" -f2)
-    echo ${stationID}
     if [[ stationID != "XX0001" ]]; then
         last_archive=$dir;
     fi
