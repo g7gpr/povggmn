@@ -2,6 +2,7 @@
 cd ~/source
 rm -rf RMS
 rsync -ah --include ".*" /home/gmn/source/RMS .
+git reset --hard
 git checkout prerelease
 cd ~/source/RMS
 for dir in ~/RMS_data/ArchivedFiles/*/; do last_archive=$dir; done
