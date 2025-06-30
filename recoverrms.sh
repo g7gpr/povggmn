@@ -17,5 +17,5 @@ echo Pulling files from ${last_archive}
 cp ${last_archive}mask.bmp ${last_archive}.config ${last_archive}platepar_cmn2010.cal .
 python -m Utils.MigrateConfig -u
 echo .config file has staionID $(grep stationID .config | cut -d ":" -f2 )
-echo platepar file has stationID  $(grep station_code platepar_cmn2010.cal | cut -d ":" -f2 | tr -cd '[:alpha:]')
+echo platepar file has stationID  $(grep station_code platepar_cmn2010.cal | cut -d ":" -f2 | tr -cd '[:alnum:]')
 
