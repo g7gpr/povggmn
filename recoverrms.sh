@@ -19,8 +19,9 @@ git reset --hard; git checkout prerelease
 for dir in ~/RMS_data/ArchivedFiles/*/; do
 
     stationID=$(grep stationID ${dir}.config | cut -d ":" -f2)
-    echo $stationID"this"
+
     if [[ stationID != "XX0001" ]]; then
+        echo $stationID
         last_archive_for_config=$dir;
     fi
     done
