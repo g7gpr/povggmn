@@ -45,7 +45,8 @@ python -m Utils.MigrateConfig -u
 echo Got mask and .config from ${last_archive_for_config}
 echo Got platepar from ${last_archive_for_platepar}
 
-
-echo ' .config file has stationID '$(grep stationID .config | cut -d ":" -f2 | tr -cd '[:alnum:]' )
-echo 'platepar file has stationID '$(grep station_code platepar_cmn2010.cal | cut -d ":" -f2 | tr -cd '[:alnum:]')
+config_stationID=$(grep stationID .config | cut -d ":" -f2 | tr -cd '[:alnum:]' )
+platepar_staionID=$(grep station_code platepar_cmn2010.cal | cut -d ":" -f2 | tr -cd '[:alnum:]')
+echo ' .config file has stationID '$config_stationID
+echo 'platepar file has stationID '$platepar_staionID
 
