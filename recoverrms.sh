@@ -11,3 +11,4 @@ cp ${last_archive}mask.bmp ${last_archive}.config ${last_archive}platepar_cmn201
 python -m Utils.MigrateConfig -u
 echo .config file has $(grep stationID .config | cut -d ":" -f2 )
 echo platepar file has $(grep station_code platepar_cmn2010.cal | cut -d ":" -f2)
+cd ~/source/RMS
