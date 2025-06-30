@@ -3,7 +3,7 @@ cd ~/source
 rm -rf RMS
 rsync -ah --include ".*" /home/gmn/source/RMS .
 cd ~/source/RMS
-Scripts/RMS_Update.sh
+mv .config .configTemplate
 git reset --hard
 git checkout prerelease
 for dir in ~/RMS_data/ArchivedFiles/*/; do last_archive=$dir; done
