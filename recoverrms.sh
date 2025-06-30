@@ -4,7 +4,7 @@ rm -rf RMS
 rsync -ah --include ".*" /home/gmn/source/RMS .
 git checkout prerelease
 cd ~/source/RMS
-last_archive=$(stat ~/RMS_data/ArchivedFiles/* | grep File: | tail -n1 | cut -d ':' -f2)
+for dir in ~/RMS_data/CapturedFiles/*/; do last_archive=$dir; done
 echo Pulling files from ${last_archive}
 cp ${last_archive}/mask.bmp ${last_archive}/.config ${last_archive}/platepar_cmn2010.cal .
 python -m Utils.MigrateConfig -u
