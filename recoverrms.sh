@@ -19,7 +19,7 @@ git reset --hard; git checkout prerelease
 for dir in ~/RMS_data/ArchivedFiles/*/; do
 
     stationID=$(grep stationID ${dir}.config | cut -d ":" -f2)
-    if [[ stationID != "XX0001" ]]; then
+    if [[ stationID != XX0001 ]]; then
         last_archive_for_config=$dir;
     fi
     done
@@ -30,7 +30,7 @@ cp ${last_archive_for_config}mask.bmp ${last_archive_for_config}.config .
 for dir in ~/RMS_data/ArchivedFiles/*/; do
 
     stationID=$(grep station_code ${dir}platepar_cmn2010.cal | cut -d ":" -f2 | tr -cd '[:alnum:]')
-    if [[ stationID != "XX0001" ]]; then
+    if [[ stationID != XX0001 ]]; then
         last_archive_for_platepar=$dir;
     fi
     done
@@ -42,7 +42,7 @@ python -m Utils.MigrateConfig -u
 
 # Echo where files were found
 echo Got mask and .config from ${last_archive_for_config}
-echo Gpt platepar from ${last_archive_for_platepar}
+echo Got platepar from ${last_archive_for_platepar}
 
 
 echo ' .config file has stationID '$(grep stationID .config | cut -d ":" -f2 | tr -cd '[:alnum:]' )
