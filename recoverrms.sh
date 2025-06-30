@@ -18,7 +18,7 @@ git reset --hard; git checkout prerelease
 # Find the newest .config in archives
 for dir in ~/RMS_data/ArchivedFiles/*/; do
 
-    stationID=$(grep stationID ${last_archive}.config | cut -d ":" -f2)
+    stationID=$(grep stationID ${dir}.config | cut -d ":" -f2)
     if [[ stationID != "XX0001" ]]; then
         last_archive_for_config=$dir;
     fi
@@ -29,7 +29,7 @@ cp ${last_archive_for_config}mask.bmp ${last_archive_for_config}.config .
 # Find the newest platepar in archives
 for dir in ~/RMS_data/ArchivedFiles/*/; do
 
-    stationID=$(grep station_code ${last_archive}platepar_cmn2010.cal | cut -d ":" -f2 | tr -cd '[:alnum:]')
+    stationID=$(grep station_code ${dir}platepar_cmn2010.cal | cut -d ":" -f2 | tr -cd '[:alnum:]')
     if [[ stationID != "XX0001" ]]; then
         last_archive_for_platepar=$dir;
     fi
