@@ -41,7 +41,6 @@ mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(wh
 ~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 logger -s -t $(whoami) RMS_Update completed
 /home/gmn/scripts/povggmn/gmnsshrsync.sh
-/home/gmn/scripts/povggmn/gmnsetcameraparamsnight.sh						#set to night mode again in case some update was needed
 ssh gmndata@192.168.1.230 "mkdir -p ~/$(hostname)/$(whoami)/latest/"
 
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
