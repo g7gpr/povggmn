@@ -9,10 +9,10 @@ thiscamera=`echo $thiscamerapath | cut -d'/' -f5-`
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n1 | head -n1`
 echo $captured
 track_stack_date=$(echo $captured | cut -d_ -f3)
-commandstring=$commandstring'   '$captured
+#commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n2 | head -n1`
 echo $captured
-#commandstring=$commandstring'   '$captured
+commandstring=$commandstring'   '$captured
 captured=/home/$thiscamera/RMS_data/CapturedFiles/`ls /home/$thiscamera/RMS_data/CapturedFiles/ | tail -n3 | head -n1`
 echo $captured
 #commandstring=$commandstring'   '$captured
