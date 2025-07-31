@@ -30,7 +30,7 @@ cd ~/source/RMS
 
 
 echo saving to /home/gmndata/trackstacks/$track_stack_date/combined/$(hostname).jpg
-commandstring='python -m Utils.TrackStack '$commandstring' -x --constellations  -c . -f6 -o /home/'$(whoami)'/combined ' $1
+commandstring='python -m Utils.TrackStack '$commandstring' -x --constellations  -c . -f6 -o /home/'$(whoami)'/combined/$(hostname).jpg ' $1
 echo $commandstring
 mkdir -p ~/sendtoweb
 $commandstring
