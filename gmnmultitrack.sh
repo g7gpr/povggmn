@@ -37,7 +37,7 @@ $commandstring
 
 mkdir -p ~/combined
 mv ~/combined/*.jpg ~/combined/$(hostname).jpg
-rsync -avzh --relative ~/./combined/*.jpg gmndata@192.168.1.230:trackstacks/$track_stack_date/
+rsync -avzh --relative ~/./combined/*.jpg gmndata@192.168.1.230:trackstacks/$track_stack_date/$(hostname).jpg
 rm -f ~/combined/$(hostname).jpg
 
 echo $commandstring
