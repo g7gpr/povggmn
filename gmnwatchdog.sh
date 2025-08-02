@@ -141,7 +141,7 @@ mv /home/gmn/states/readyforshutdown/$(whoami) /home/gmn/states/runningfinalrout
 logger -s -t GMN $(whoami) removed from ready for shutdown
 source ~/vRMS/bin/activate
 cd ~/source/RMS
-/home/gmn/scripts/povggmn/gmnmultitrack.sh
+#/home/gmn/scripts/povggmn/gmnmultitrack.sh
 logger -s -t GMN Cleared ready for shutdown directory
 logger -s -t Wait 600 seconds so mails get sent
 mv /home/gmn/states/runningfinalroutinesstation/$(whoami) /home/gmn/states/shutdowncalls
