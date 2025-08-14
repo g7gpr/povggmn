@@ -40,7 +40,7 @@ logger -s -t $(whoami) in systembooted
 mv /home/gmn/states/systembooted/$(whoami) /home/gmn/states/camerasupdating/$(whoami)		#move out of booted and into updating
 ~/source/RMS/Scripts/RMS_Update.sh								#update the gmnsoftware
 logger -s -t $(whoami) RMS_Update completed
-/home/gmn/scripts/povggmn/gmnsshrsync.sh
+/home/gmn/scripts/povggmn/gmnsshrsync.sh &
 ssh gmndata@192.168.1.230 "mkdir -p ~/$(hostname)/$(whoami)/latest/"
 
 mv /home/gmn/states/camerasupdating/$(whoami) /home/gmn/states/camerasreadytostart/$(whoami)	#set camera as ready to start
@@ -93,7 +93,7 @@ latestdirectory=/home/$username/RMS_data/CapturedFiles/$latestdirectory
 track_stack_date=$(echo $latestdirectory | cut -d_ -f3)
 echo Saving to /home/gmndata/trackstacks/$track_stack_date/
 logger -s -t $(whoami) Starting trackstack in $latestdirectory
-/home/gmn/scripts/povggmn/gmnsshrsync.sh 
+/home/gmn/scripts/povggmn/gmnsshrsync.sh &
 python -m Utils.TrackStack $latestdirectory --constellations -x
 rsync $latestdirectory/*_track* gmndata@192.168.1.230:/home/gmndata/trackstacks/$track_stack_date/
 
