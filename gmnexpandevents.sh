@@ -56,4 +56,4 @@ do
   fi
 done
 
-rsync -av --delete /home/event_monitor/files/ david@192.168.1.230:/var/www/html/data/events
+rsync -av --delete /home/event_monitor/files/ david@192.168.217.230:/var/www/html/data/events

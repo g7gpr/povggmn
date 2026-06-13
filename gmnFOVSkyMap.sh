@@ -28,4 +28,4 @@ python -m Utils.FOVSkyMap -n /home/gmn/platepars/
 mv /home/$username/platepars/fov_sky_map.png $target_dir/$(hostname).png
 echo Saved at
 echo $target_dir
-rsync -azvh $target_dir/*.png gmndata@192.168.1.230:SkyMaps/
+rsync -azvh $target_dir/*.png gmndata@192.168.217.230:SkyMaps/
